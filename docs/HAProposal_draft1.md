@@ -1,9 +1,9 @@
 ## MoKeAn^2 Data Consultancy
 
-**Title**: Surgical System Visualization Application
-**Application Completion Date**: March 23, 2022
-**Data Sources**: [BC Surgical Wait Times -2009_2021 Quarterly Surgical Wait Times & 2021_2022 Quarterly Surgical Wait Times]("https://catalogue.data.gov.bc.ca/dataset/bc-surgical-wait-times/resource/f294562c-a6fd-4d7f-8f99-c51c91891c67") 
-**Requestor**: Lee Charbonder, Lead- Surgical Services Fraser Health Authority (newly appointed, prior Lead Emergency Services Virginia Medical services, Seattle USA))
+**Title**: Surgical System Visualization Application\n
+**Application Completion Date**: March 23, 2022\n
+**Data Sources**: [BC Surgical Wait Times -2009_2021 Quarterly Surgical Wait Times & 2021_2022 Quarterly Surgical Wait Times]("https://catalogue.data.gov.bc.ca/dataset/bc-surgical-wait-times/resource/f294562c-a6fd-4d7f-8f99-c51c91891c67") \n
+**Requestor**: Lee Charbonder, Lead- Surgical Services Fraser Health Authority (newly appointed, prior Lead Emergency Services Virginia Medical services, Seattle USA))\n
 **Surgical System Visualization App Purpose**: Through interactive graphical and numeric visualizations, the proposed application will be designed to:  
 1) Assess historical and current surgical resource/demand relationships in an effort to proactively secure future health care personal, infrastructure and funding.
 2) Support development of the Fraser Health 2022/23 Surgical Funding Proposal for the upcoming BC Ministry of Health Resource Allocation Meeting. 
