@@ -1,16 +1,15 @@
 ## MoKeAn^2 Data Consultancy
 
-#### Title: Surgical System Visualization App
-#### Application Completion Date: March 23, 2022
-#### Data Sources: [BC Surgical Wait Times -2009_2021 Quarterly Surgical Wait Times & 2021_2022 Quarterly Surgical Wait Times]("https://catalogue.data.gov.bc.ca/dataset/bc-surgical-wait-times/resource/f294562c-a6fd-4d7f-8f99-c51c91891c67") 
-#### Requestor: Lee Charbonder, Lead- Surgical Services Fraser Health Authority (newly appointed, prior Lead Emergency Services Virginia Medical services, Seattle USA))
-#### Application Purpose: 
-Through interactive graphical and numeric visualizations, the proposed application will be designed to:  
+**Title**: Surgical System Visualization Application
+**Application Completion Date**: March 23, 2022
+**Data Sources**: [BC Surgical Wait Times -2009_2021 Quarterly Surgical Wait Times & 2021_2022 Quarterly Surgical Wait Times]("https://catalogue.data.gov.bc.ca/dataset/bc-surgical-wait-times/resource/f294562c-a6fd-4d7f-8f99-c51c91891c67") 
+**Requestor**: Lee Charbonder, Lead- Surgical Services Fraser Health Authority (newly appointed, prior Lead Emergency Services Virginia Medical services, Seattle USA))
+**Surgical System Visualization App Purpose**: Through interactive graphical and numeric visualizations, the proposed application will be designed to:  
 1) Assess historical and current surgical resource/demand relationships in an effort to proactively secure future health care personal, infrastructure and funding.
 2) Support development of the Fraser Health 2022/23 Surgical Funding Proposal for the upcoming BC Ministry of Health Resource Allocation Meeting. 
 3) Review the impact of Covid-19 on surgical demand and throughput.   
 4) Identify surgical procedures that are exceeding surgical wait-time benchmarks.
-(We pick only two or three of these, although I think we can build a dashboard to answer all these and even many more)
+(We could pick only two or three of these, although I think we can build a dashboard to answer all these and even many more)
 
 ### *Background Information*
 #### Surgical Wait Times
@@ -30,10 +29,11 @@ The proposed application will visualize British Columbia surgical related data c
 The proposed app will feature an interactive graphical user interface to assist the Fraser Health Surgical Lead and other health care administrators as they [navigate] the surgical data in an effort to [identify] and [interpret] surgical trends, to efficiently [communicate] regional demands and requirements to upstream government and healthcare decision makers and to appropriately [plan] and [administer] surgical system resources. The apps ability to visualize data from the provincial down to the individual hospital levels will assist healthcare decision makers to [understand] the data directly related to their portfolios in relation to the entire surgical system.  
 
 
-### Application Features
+### *Application Features*
 The app uses six tabs to delivery corresponding information for the six health authorities. Each tab page consists of three sections. The first section provides the summarized information contained in two cards showing the total number of cases and total cases completed. The second section displays critical variables by time in the form of two plots. Healthcare administrators can see the change in proportion of completed cases and average wait time by time to see if their actions at certain point in time have impacted the surgical process. The third section visualizes surgical demand for each health authority and hospital.  These sunburst plots and their associated range slider portray the hospital and authorities ability to handle surgical demands over time. TIn combination these pages will provide healthcare administrators insights about outlier hospitals and surgical procedures that may require additional human, infrastructure and financial resources.
 
 
-### Application Mock-Up
+### *Application Prototype*
+Please review this proposed app mock-up and provide any feedback, suggestions, concerns, questions and comments to your MoKeAn^2 consultant at your earliest convenience.
 
 INSERT Anqi's sketch here.
