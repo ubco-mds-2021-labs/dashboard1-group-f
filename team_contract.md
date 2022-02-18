@@ -64,8 +64,8 @@ All team members agree to the following conflict management strategies:
 
 1. Recognizing that all confrontations involve at least two opposing viewpoints, project members will maintain confidentiality.
 2. Members of the group will identify areas of dispute and work together to reach an agreement. If no agreement is obtained, move on to next step.
-3. The leader will determine the dispute's relevancy or importance, and if it is regarded doubtful or minor, the conflict will be postponed.
-4. Before calling a vote, the leader will determine the amount of time for discussion or arbitration. A vote will be called by the leader. If the vote is tied, the leader makes the final call.
+3. The group will determine the dispute's relevancy or importance, and if it is regarded doubtful or minor, the conflict will be postponed.
+4. Before calling a vote, the group will determine the amount of time for discussion or arbitration. A vote will be called by the group. If the vote is tied, the neutral third party makes the final call.
 5. When a problem arises, resolution will be attempted first by polite dialogue, then through professor mediation, and lastly through formal university channels.
 
 ## Deadlines
