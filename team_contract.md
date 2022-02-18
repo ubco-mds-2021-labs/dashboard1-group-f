@@ -19,8 +19,6 @@ If you are not able to agree on these points, it is a sign that your group may b
 All team members agree to fully participate in all aspects of the project.
 To accomplish this goal, below are five concrete actions that we all agree to take:
 
-Participation:
-
 1. Welcome all members to participate in all aspects of group work, as much as they can, it could be based on their strengths or could not.
 2. All sort of positive contributions to group activities are highly appreciated regardless of the person’s strength, background, race.
 3. Diverse life experiences and individual abilities are acknowledged and valued, thereby promoting diversity, involvement, and expertise while maximising productivity and efficiency.
