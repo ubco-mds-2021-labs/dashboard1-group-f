@@ -5,7 +5,7 @@
 
 ## Team Members
 
-- Person 1: one sentence about you!
+- Anqi Li: I like to try new things and want to do something creative :)
 - Person 2: one sentence about you!
 - Person 3: one sentence about you!
 - Person 4: one sentence about you!
