@@ -30,7 +30,7 @@ The app uses six radio buttons to delivery corresponding information for the six
 | | |
 |:-------------------------:|:------------------------:|
 ![Tab 1](docs/sketch/Tab1.JPG) | ![Tab 2](docs/sketch/Tab2.JPG)
-![Tab 3](docs/sketch/Tab1.JPG) | ![Tab 3](docs/sketch/Tab1.JPG)
+![Tab 3](docs/sketch/Tab3.JPG) | ![Tab 3](docs/sketch/Tab4.JPG)
 
 ## Describe your dataset in about 150-200 words
 
