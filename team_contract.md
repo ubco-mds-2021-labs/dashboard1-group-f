@@ -19,8 +19,8 @@ If you are not able to agree on these points, it is a sign that your group may b
 All team members agree to fully participate in all aspects of the project.
 To accomplish this goal, below are five concrete actions that we all agree to take:
 
-1. Welcome all members to participate in all aspects of group work, as much as they can, it could be based on their strengths or could not.
-2. All sort of positive contributions to group activities are highly appreciated regardless of the person’s strength, background, race.
+1. Welcome all members to participate in all aspects of group work as much as they can based on their various strengths.
+2. All sorts of positive contributions to group activities are highly appreciated regardless of the person’s strengths, background, race.
 3. Diverse life experiences and individual abilities are acknowledged and valued, thereby promoting diversity, involvement, and expertise while maximising productivity and efficiency.
 4. Members of the group are encouraged to be eager and professional in their participation.
 5. Personal growth and skill development are aided by acceptance of one's own areas for improvement.
@@ -56,7 +56,7 @@ All team members agree to following the code of conduct, and below are five conc
 2. When there is inappropriate language or other behaviour that is judged unprofessional or unacceptable in the community, team members should issue a confidential, verbal or written warning, explaining the nature of the offence and why the behaviour was wrong. It's possible that an apology will be sought.
 3. If a violation occurs through a single incident or series of activities, a warning with consequences for continued behaviour.
 4. When there has been a major breach of community standards, such as repeated inappropriate behaviour. The professor will be alerted of the infraction and will be sought for advice on how to proceed.
-5. In case a pattern of community standards is being violated, such as persistent inappropriate behaviour, harassment of an individual, or violence toward or disparagement of groups of people. A request maybe made to the professor to remove the offender from the group.
+5. In case a pattern of community standards is being violated, such as persistent inappropriate behaviour, harassment of an individual, or violence toward or disparagement of groups of people. A request may be made to the professor to remove the offender from the group.
 
 ## Conflict Management
 
@@ -74,13 +74,14 @@ All team members agree to the following conventions around course deadlines:
 
 1. A deadline for each individual task will be set by agreement between group members during meetings.
 2. Group members should accomplish tasks by the agreed-upon deadline. If it appears that fulfilling a deadline would be difficult, the individual in question should request assistance from other team members as soon as possible to avoid a delay.
-3. All group task’s deadlines must be aligned with the course deadlines.
+3. All group tasks' deadlines must be aligned with the course deadlines.
 
 ## Git Workflow
 
 All team members agree to the Feature Branch workflow, and the following conventions (master branch protection):
+
 1. All milestone assignments only live in one GitHub repository named **dashboard1-group-f**, and each milestone assignment has its own folder within the repository.
-2. When each member starts building on a new feature, they will create their new branch with relevant name apart from main branch.
-3. Any time a member would like to add, commit, and push their code. They should do that for the local and remote of the feature branch first.
-4. After the remote feature branch had been pushed successfully, the member should send a pull request for merging their updated feature to the main branch (if it was approved by other group’s members.)
-5. When conflicts happened during merging, the team member should attempt checking their work to solve within their reasonable time first. If it could not be resolved, they should seek for help from other members on time to avoid any delays.
+2. When each member starts building a new feature, they will create a new branch with a relevant name but apart from the main branch.
+3. Any time a member would like to add, commit, and push their code, they should do that for the local and remote of the feature branch first.
+4. After the remote feature branch has been pushed successfully, the member should send a pull request for merging their updated feature to the main branch assuming it was approved by other group members.
+5. When conflicts happen during merging, the team member should attempt to check their work to solve within a reasonable time frame. If it could not be resolved, they should seek help from other members in order to avoid delays.
