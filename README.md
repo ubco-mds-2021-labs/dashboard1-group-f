@@ -28,16 +28,16 @@ Improving surgical efficiency and maximizing surgical completion counts has been
 
 The app uses six radio buttons to delivery corresponding information for the six health authorities. We designed four tabs to arrange the display of our data and variables. The first tab provides the summarized information to the user, which contains two cards showing the total number of cases and total cases completed, and also the proportion of completed cases by time, from which healthcare administrators can see the change and see if their actions at certain point in time has caused an impact on surgical demand. The second tab shows information about waiting cases, including number of waiting cases by time and by different hospitals and surgical groups to show the distribution of surgical demand. The third tab shows information about completed cases, including number of waiting cases by time and by different hospitals and surgical groups to show and their ability to handle the surgical demands. The fourth tab shows information about waiting time, including average waiting time and waiting time by procedures, which can provide an insight to the healthcare administrators about the procedures that require attention and need more human, infrastructure and financial resources. 
 
-![Tab 1](sketch/Tab1.JPG)
+![Tab 1](docs/sketch/Tab1.JPG)
 <p align="center">Tab1</p>
 
-![Tab 2](sketch/Tab2.JPG)
+![Tab 2](docs/sketch/Tab2.JPG)
 <p align="center">Tab2</p>
 
-![Tab 3](sketch/Tab3.JPG)
+![Tab 3](docs/sketch/Tab3.JPG)
 <p align="center">Tab3</p>
 
-![Tab 4](sketch/Tab4.JPG)
+![Tab 4](docs/sketch/Tab4.JPG)
 <p align="center">Tab4</p>
 
 ## Describe your dataset in about 150-200 words
