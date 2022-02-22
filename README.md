@@ -9,7 +9,7 @@
 ## Team Members
 
 - Anqi Li: I like to try new things and want to do something creative :)
-- Andrew Nguyen: I am not soft tomatoes!
+- Andrew Nguyen: I never give up.
 - Person 3: one sentence about you!
 - Person 4: one sentence about you!
 
