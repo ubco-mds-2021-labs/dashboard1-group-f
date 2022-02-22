@@ -10,7 +10,7 @@
 
 - Anqi Li: I like to try new things and want to do something creative :)
 - Andrew Nguyen: I never give up.
-- Person 3: one sentence about you!
+- Monica Penner: My current-self despises working out but I still exercise because I know my future-self will be grateful.
 - Person 4: one sentence about you!
 
 ## Describe your topic/interest in about 150-200 words
