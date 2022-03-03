@@ -13,8 +13,8 @@ df = pd.read_excel('./data/2009_2021-quarterly-surgical_wait_times.xlsx')
 
 # Declare dash app
 app = Dash(
-    __name__#,
-    # external_stylesheets = [dbc.themes.MINTY]   # why doesn't this apply to non-html components?
+    __name__,
+    external_stylesheets = [dbc.themes.MINTY]   # why doesn't this apply to non-html components?
 )
 
 # Tab 1 Layout Components
