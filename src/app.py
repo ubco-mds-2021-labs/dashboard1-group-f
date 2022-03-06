@@ -1,8 +1,5 @@
-from enum import unique
-from click import style
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
-from vega_datasets import data
 
 import dash_bootstrap_components as dbc
 import altair as alt
@@ -36,7 +33,7 @@ alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilit
 # Declare dash app
 app = Dash(
     __name__,
-    external_stylesheets = [dbc.themes.MINTY]   # why doesn't this apply to non-html components?
+    external_stylesheets = [dbc.themes.MINTY]
 )
 
 # Tab 1 Layout Components
@@ -52,22 +49,29 @@ tab2 = [
 # Main Layout components
 title = html.H1('BC Surgical Wait Time Dashboard')
 
-region_select = html.Div([
-    html.Button('Select All', id = 'region-select-all', n_clicks = 0),
+regions = df.health_authority.unique()[1:-1]
+region_select = dbc.InputGroup([
     dcc.Dropdown(
-        df.health_authority.unique()[1:-1],
-        df.health_authority.unique()[1:-1],
+        options = df.health_authority.unique()[1:-1],
+        value = df.health_authority.unique()[1:-1],
         multi = True,
+        className = 'dash-bootstrap',
         id = 'region-select'
+    ),
+    dbc.Button(
+        'Select all regions',
+        id = 'region-select-all',
+        n_clicks = 0,
+        color = 'primary'
     )
 ])
 
-tabs = dcc.Tabs([
-    dcc.Tab(
+tabs = dbc.Tabs([
+    dbc.Tab(
         children = tab1,
         label = 'Tab 1'
     ),
-    dcc.Tab(
+    dbc.Tab(
         children = tab2,
         label = 'Tab 2'
     )
@@ -78,7 +82,7 @@ app.layout = dbc.Container([
     title,
     region_select,
     tabs
-])
+], fluid = False)
 
 @app.callback(
     Output('region-select', 'value'),
