@@ -55,12 +55,17 @@ region_select = dbc.InputGroup([
         options = df.health_authority.unique()[1:-1],
         value = df.health_authority.unique()[1:-1],
         multi = True,
+        style = {
+            'border-radius': '0.4rem 0 0 0.4rem',
+            'width': '46rem'
+        },
         className = 'dash-bootstrap',
         id = 'region-select'
     ),
     dbc.Button(
         'Select all regions',
         id = 'region-select-all',
+        style = {'border': '0'},
         n_clicks = 0,
         color = 'primary'
     )
@@ -82,7 +87,7 @@ app.layout = dbc.Container([
     title,
     region_select,
     tabs
-], fluid = False)
+], fluid = True)
 
 @app.callback(
     Output('region-select', 'value'),
