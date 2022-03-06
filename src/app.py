@@ -53,14 +53,10 @@ tab2 = [
 title = html.H1('BC Surgical Wait Time Dashboard')
 
 region_select = html.Div([
-    dcc.Checklist(
-        options = [{'label': 'Select All', 'value': 1}],
-        value = [],
-        id = 'region-select-all'
-    ),
+    html.Button('Select All', id = 'region-select-all', n_clicks = 0),
     dcc.Dropdown(
         df.health_authority.unique()[1:-1],
-        df.health_authority.unique()[1],
+        df.health_authority.unique()[1:-1],
         multi = True,
         id = 'region-select'
     )
@@ -86,26 +82,11 @@ app.layout = dbc.Container([
 
 @app.callback(
     Output('region-select', 'value'),
-    Input('region-select-all', 'value'),
-    State('region-select', 'value'),
+    Input('region-select-all', 'n_clicks'),
     State('region-select', 'options')
 )
-def select_all_regions(all, regions_selected, regions):
-    if all:
-        return [region for region in regions]
-    else:
-        return regions_selected
-
-@app.callback(
-    Output('region-select-all', 'value'),
-    Input('region-select', 'value'),
-    State('region-select', 'options')
-)
-def deselect_checkbox(regions_selected, regions):
-    if regions_selected == regions:
-        return [1]
-    else:
-        return []
+def select_all_regions(_, regions):
+    return [region for region in regions]
 
 if __name__ == '__main__':
     app.run_server(debug=True)
