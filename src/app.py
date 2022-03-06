@@ -33,16 +33,120 @@ count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
 main = df[(df['procedure']!='All Procedures') & (df['hospital']!='All Facilities') & (df['health_authority']!='All Health Authorities')]
 count  = count[(count['procedure']!='All Procedures') & (count['hospital']!='All Facilities') & (count['health_authority']!='All Health Authorities')]
 alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df['health_authority']=='All Health Authorities')]
+# Create Year_quarter column
+df['Y_Q'] = df['year'].str[-2:].map(str) + '_' + df['quarter'].map(str)
+
 # Declare dash app
 app = Dash(
     __name__,
     external_stylesheets = [dbc.themes.MINTY]   # why doesn't this apply to non-html components?
 )
+alt.renderers.enable('mimetype')
+alt.data_transformers.enable('data_server')
+
+## Plotting (side by side bar plot for procedures)
+def plot_bar_sbs_procedure(autho=["Fraser"]):
+    subdata=count[count.health_authority.isin(autho)]
+    top=subdata.groupby(["procedure"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["procedure"].tolist()
+    subdata_top=subdata[subdata["procedure"].isin(top)]
+    chart1 = alt.Chart(subdata_top).mark_bar().encode(
+            x=alt.X('sum(waiting):Q',title="Total Waiting Cases"),
+            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            color=alt.Color('year')
+        ).properties(
+            title="Number of Waiting Cases for Different Procedure Groups",
+            width=200,
+            height=300
+        ).interactive()
+    top2=subdata.groupby(["procedure"])[["completed"]].sum().reset_index().sort_values(by=['completed'], ascending=False).head(20)["procedure"].tolist()
+    subdata_top2=subdata[subdata["procedure"].isin(top2)]
+    chart2 = alt.Chart(subdata_top2).mark_bar().encode(
+            x=alt.X('sum(completed):Q',title="Total Completed Cases"),
+            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            color=alt.Color('year')
+        ).properties(
+            title="Number of Completed Cases for Different Procedure Groups",
+            width=200,
+            height=300
+        ).interactive()
+    chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
+        labelFontSize=10,
+        titleFontSize=10
+    ).to_html()
+    return chart_sbs
+
+def plot_bar_sbs_hospital(autho=["Fraser"]):
+    subdata=count[count.health_authority.isin(autho)]
+    top=subdata.groupby(["hospital"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["hospital"].tolist()
+    subdata_top=subdata[subdata["hospital"].isin(top)]
+    chart1 = alt.Chart(subdata_top).mark_bar().encode(
+            x=alt.X('sum(waiting):Q',title="Total Waiting Cases"),
+            y=alt.Y("hospital", sort='-x',title="Hospital"),
+            color=alt.Color('year')
+        ).properties(
+            title="Number of Waiting Cases for Different Hospitals",
+            width=200,
+            height=300
+        ).interactive()
+    top2=subdata.groupby(["hospital"])[["completed"]].sum().reset_index().sort_values(by=['completed'], ascending=False).head(20)["hospital"].tolist()
+    subdata_top2=subdata[subdata["hospital"].isin(top2)]
+    chart2 = alt.Chart(subdata_top2).mark_bar().encode(
+            x=alt.X('sum(completed):Q',title="Total Completed Cases"),
+            y=alt.Y("hospital", sort='-x',title="Hospital"),
+            color=alt.Color('year')
+        ).properties(
+            title="Number of Completed Cases for Different Hospitals",
+            width=200,
+            height=300
+        ).interactive()
+    chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
+        labelFontSize=10,
+        titleFontSize=10
+    ).to_html()
+    return chart_sbs
+
+## Plotting (line plot)
+def line_plot(autho=["Fraser"]):
+    all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
+    data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
+    chart=alt.Chart(data).mark_line().encode(
+        x=alt.X('Y_Q', title='Year & Quarter'),
+        y=alt.Y('value',title='Number of Cases'),
+        color='variable'
+    ).properties(
+        title="Number of Waiting & Completed Cases by Time",
+        width=920,
+        height=280)
+    return chart.interactive().to_html()
+
+## Tab1-plot1: waiting cases by procedure
+t1p1=html.Iframe(
+    id="t1p1",
+    srcDoc=plot_bar_sbs_procedure(autho=["Fraser"]),
+    style={'border-width': '0', 'width': '100%', 'height': '400px'}
+)
+
+t1p2=html.Iframe(
+    id="t1p2",
+    srcDoc=plot_bar_sbs_hospital(autho=["Fraser"]),
+    style={'border-width': '0', 'width': '100%', 'height': '400px'}
+)
+
+## Tab1-plot5: waiting & completed cases by time
+t1p5=html.Iframe(
+    id="t1p5",
+    srcDoc=line_plot(),
+    style={'border-width': '0', 'width': '100%', 'height': '400px'}
+)
 
 # Tab 1 Layout Components
 tab1 = [
-    html.P('You selected tab 1!')
-]
+    html.Div([
+        dbc.Row(dbc.Col(t1p5)),
+        dbc.Row(dbc.Col(t1p1)),
+        dbc.Row(dbc.Col(t1p2)),
+            ]),
+    ]
 
 # Tab 2 Layout Components
 tab2 = [
@@ -107,5 +211,21 @@ def deselect_checkbox(regions_selected, regions):
     else:
         return []
 
+## Callback functions
+@app.callback(
+    Output('t1p1','srcDoc'),
+    Input('region-select', 'value'))
+def update_t1p1(autho):
+    return plot_bar_sbs_procedure(list(autho))
+@app.callback(
+    Output('t1p2','srcDoc'),
+    Input('region-select', 'value'))
+def update_t1p2(autho):
+    return plot_bar_sbs_hospital(list(autho))
+@app.callback(
+    Output('t1p5','srcDoc'),
+    Input('region-select', 'value'))
+def update_t1p5(autho):
+    return line_plot(list(autho))
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(host='127.0.0.1', port=8050, debug=True)
