@@ -49,15 +49,13 @@ tab2 = [
 # Main Layout components
 title = html.H1('BC Surgical Wait Time Dashboard')
 
-regions = df.health_authority.unique()[1:-1]
 region_select = dbc.InputGroup([
     dcc.Dropdown(
-        options = df.health_authority.unique()[1:-1],
-        value = df.health_authority.unique()[1:-1],
+        options = df.health_authority.unique()[1:],
         multi = True,
         style = {
             'border-radius': '0.4rem 0 0 0.4rem',
-            'width': '46rem'
+            'width': '55rem'
         },
         className = 'dash-bootstrap',
         id = 'region-select'
