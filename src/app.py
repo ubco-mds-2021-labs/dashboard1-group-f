@@ -1,8 +1,5 @@
-from enum import unique
-from click import style
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
-from vega_datasets import data
 
 import dash_bootstrap_components as dbc
 import altair as alt
@@ -39,6 +36,7 @@ df['Y_Q'] = df['year'].str[-2:].map(str) + '_' + df['quarter'].map(str)
 # Declare dash app
 app = Dash(
     __name__,
+
     external_stylesheets = [dbc.themes.MINTY]   
 )
 alt.renderers.enable('mimetype')
@@ -238,6 +236,7 @@ t2p3=html.Iframe(
     id="t2p3",
     srcDoc=plot_bar_sbs_hospital_t2(autho=["Fraser"]),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
+
 )
 
 # Shared Tab Layout Components
@@ -285,28 +284,34 @@ tab2 = [
 # Main Layout components
 title = html.H1('BC Surgical Wait Time Dashboard')
 
-region_select = html.Div([
-    dcc.Checklist(
-        options = [{'label': 'Select All', 'value': 1}],
-        value = [],
-        id = 'region-select-all'
-    ),
+region_select = dbc.InputGroup([
     dcc.Dropdown(
-        df.health_authority.unique()[1:-1],
-        df.health_authority.unique()[1],
+        options = df.health_authority.unique()[1:],
         multi = True,
+        style = {
+            'border-radius': '0.4rem 0 0 0.4rem',
+            'width': '55rem'
+        },
+        className = 'dash-bootstrap',
         id = 'region-select'
+    ),
+    dbc.Button(
+        'Select all regions',
+        id = 'region-select-all',
+        style = {'border': '0'},
+        n_clicks = 0,
+        color = 'primary'
     )
 ])
 
 
+tabs = dbc.Tabs([
+    dbc.Tab(
 
-tabs = dcc.Tabs([
-    dcc.Tab(
         children = tab1,
         label = 'Waiting and Completed Cases -Tab 1'
     ),
-    dcc.Tab(
+    dbc.Tab(
         children = tab2,
         label = 'Wait Times, 50th and 90th percentile -Tab 2'
     )
@@ -317,30 +322,15 @@ app.layout = dbc.Container([
     title,
     region_select,
     tabs
-])
+], fluid = True)
 
 @app.callback(
     Output('region-select', 'value'),
-    Input('region-select-all', 'value'),
-    State('region-select', 'value'),
+    Input('region-select-all', 'n_clicks'),
     State('region-select', 'options')
 )
-def select_all_regions(all, regions_selected, regions):
-    if all:
-        return [region for region in regions]
-    else:
-        return regions_selected
-
-@app.callback(
-    Output('region-select-all', 'value'),
-    Input('region-select', 'value'),
-    State('region-select', 'options')
-)
-def deselect_checkbox(regions_selected, regions):
-    if regions_selected == regions:
-        return [1]
-    else:
-        return []
+def select_all_regions(_, regions):
+    return [region for region in regions]
 
 ## Callback functions
 
