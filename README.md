@@ -88,24 +88,24 @@ Please keep in mind that maintaining a good and supportive environment for every
 - From your fork open a pull request in the correct branch. Target the project's `develop` branch if there is one, else go for `master`!
 - Once the pull request is approved and merged you can pull the changes from `upstream` to your local repo and delete your extra branch(es).
 
-### Installation instruction
+### Installation instructions
 
-Package dependencies can be installed using pip or conda. Make sure you have pip or conda using this [Instruction Guidlines](https://ubc-mds.github.io/resources_pages/installation_instructions/). In order to install this dashboard app and run in your local computer, please follow these steps:
+Package dependencies can be installed using pip or conda. Make sure you installed python and pip/conda using this [Instruction Guidlines](https://ubc-mds.github.io/resources_pages/installation_instructions/). In order to install this dashboard app and run in your local computer, please follow these steps:
 
 
-1.Open a terminal in your local computer, navigate to a location you desired using `cd path` and clone our project from this Github repository using command:
+1.-Open a terminal in your local computer, navigate to a location you desired using `cd path` and clone our project from this Github repository using command:
 
 
     git clone https://github.com/ubco-mds-2021-labs/dashboard1-group-f.git
 
 
-2.In the terminal, navigate to the project directory using `cd path` and run the following command, please note if there is any package dependency missing please install using `pip install package_name`:
+2.-In the terminal, navigate to the project directory using `cd path` and run the following command, please note if there is any package dependency missing please install using `pip install package_name`:
 
 
-    pip app.py
+    python app.py
     
     
-3.Copy the link from the terminal `localhost` and enter to your web browser to view the dash app.
+3.-Copy the link from the terminal `localhost` and enter to your web browser to view the dash app.
 
 
 ## Contact us
