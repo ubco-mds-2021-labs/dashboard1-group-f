@@ -6,7 +6,7 @@
 
 ## Welcome to our project!
 
-Warmest welcome! :tada::tada::tada: Accueil chaleureux! :balloon::balloon::balloon:
+Warmest welcome! :tada::tada::tada: Accueil chaleureux! :tada::tada::tada:
 
 Thanks for visiting the Surgical System Visualization Application app project repository.
 
@@ -17,7 +17,7 @@ This document (README.md) is designed to give you overall information about the 
 * [Who are we?](#who-are-we)
 * [About this Dashboard](#about-this-dashboard)
 * [Describe the dataset](#describe-the-dataset)
-* [Interested to contribute to our project?](#interested-to-contribute-to-our-project)
+* [Interested to contribute to our project?](#are-you-a-developer-and-interested-to-contribute-to-our-project)
 * [Contact us](#contact-us)
 * [Acknowledgements and references](#acknowledgements-and-references)
 
@@ -93,19 +93,19 @@ Please keep in mind that maintaining a good and supportive environment for every
 Package dependencies can be installed using pip or conda. Make sure you have pip or conda using this [Instruction Guidlines](https://ubc-mds.github.io/resources_pages/installation_instructions/). In order to install this dashboard app and run in your local computer, please follow these steps:
 
 
-1. Open a terminal in your local computer, navigate to a location you desired using `cd path` and clone our project from this Github repository using command:
+1.Open a terminal in your local computer, navigate to a location you desired using `cd path` and clone our project from this Github repository using command:
 
 
     git clone https://github.com/ubco-mds-2021-labs/dashboard1-group-f.git
 
 
-2. In the terminal, navigate to the project directory using `cd path` and run the following command, please note if there is any package dependency missing please install using `pip install package_name`:
+2.In the terminal, navigate to the project directory using `cd path` and run the following command, please note if there is any package dependency missing please install using `pip install package_name`:
 
 
     pip app.py
     
     
-3. Copy the link from the terminal `localhost` and enter to your web browser to view the dash app.
+3.Copy the link from the terminal `localhost` and enter to your web browser to view the dash app.
 
 
 ## Contact us
