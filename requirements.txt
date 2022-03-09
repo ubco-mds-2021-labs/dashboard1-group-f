@@ -4,3 +4,4 @@ altair
 pandas
 numpy
 gunicorn
+openpyxl
