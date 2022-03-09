@@ -26,15 +26,15 @@ import numpy as np
 # # drop rows with NA's
 # df = df.dropna()
 
-# df = pd.read_csv('./data/data.csv')
-# #create counts dataset
-# count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
-# #data subsetting
-# main = df[(df['procedure']!='All Procedures') & (df['hospital']!='All Facilities') & (df['health_authority']!='All Health Authorities')]
-# count  = count[(count['procedure']!='All Procedures') & (count['hospital']!='All Facilities') & (count['health_authority']!='All Health Authorities')]
-# alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df['health_authority']=='All Health Authorities')]
-# # Create year_quarter column
-# df['Y_Q'] = df['year'].astype('str').str[-2:].map(str) + '_' + df['quarter'].map(str)
+df = pd.read_csv('./data/data.csv')
+#create counts dataset
+count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
+#data subsetting
+main = df[(df['procedure']!='All Procedures') & (df['hospital']!='All Facilities') & (df['health_authority']!='All Health Authorities')]
+count  = count[(count['procedure']!='All Procedures') & (count['hospital']!='All Facilities') & (count['health_authority']!='All Health Authorities')]
+alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df['health_authority']=='All Health Authorities')]
+# Create year_quarter column
+df['Y_Q'] = df['year'].astype('str').str[-2:].map(str) + '_' + df['quarter'].map(str)
 
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
