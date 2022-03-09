@@ -1,6 +1,6 @@
 # Surgical System Visualization Application (Group F)
 
-***Purpose: To support improvments in surgical efficiencies and throughput within British Columbia's surgical system using data visualization.***
+***Purpose: To support improvements in surgical efficiencies and throughput within British Columbia's surgical system using data visualization.***
 
 * Deloyed badge with link 
 
@@ -108,7 +108,7 @@ Package dependencies can be installed using pip or conda. Make sure you installe
     python app.py
     
     
-3.-Copy the link from the terminal `localhost` and enter to your web browser to view the dash app.
+3.-Copy the link `localhost` from the terminal and enter to your web browser to view the dash app.
 
 
 ## Contact us
