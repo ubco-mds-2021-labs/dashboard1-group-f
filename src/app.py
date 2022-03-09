@@ -9,10 +9,8 @@ import numpy as np
 
 # Data cleaning and data wrangling
 # Load data
-# df1 = pd.read_excel('./data/2009_2021-quarterly-surgical_wait_times.xlsx')
-# df2 = pd.read_excel('./data/2021_2022-quarterly-surgical_wait_times-q3-interim.xlsx')
-df1 = pd.read_csv('./data/2009_2021-quarterly-surgical_wait_times.csv')
-df2 = pd.read_csv('./data/2021_2022-quarterly-surgical_wait_times-q3-interim.csv')
+df1 = pd.read_excel('./data/2009_2021-quarterly-surgical_wait_times.xlsx')
+df2 = pd.read_excel('./data/2021_2022-quarterly-surgical_wait_times-q3-interim.xlsx')
 df = df1.append(pd.DataFrame(data = df2), ignore_index=True)
 # Cleaned column names
 df.columns=[i.lower() for i in (df.columns.values.tolist())]
@@ -39,6 +37,7 @@ df['Y_Q'] = df['year'].str[-2:].map(str) + '_' + df['quarter'].map(str)
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
 app.config.suppress_callback_exceptions = True
+server = app.server
 
 # Configure Altair
 alt.renderers.enable('mimetype')
@@ -395,6 +394,8 @@ def render_page_content(pathname):
         return tab1
     elif pathname == '/tab2':
         return tab2
+    else:
+        return html.H1('Welcome')
 
 # Settings
 @app.callback(
@@ -444,4 +445,4 @@ def update_t2p3(autho):
 #     return 'Year(s) selected{}'.format(value)
 
 if __name__ == '__main__':
-    app.run_server(host='127.0.0.1', port=8050, debug=True)
+    app.run_server(debug=True)
