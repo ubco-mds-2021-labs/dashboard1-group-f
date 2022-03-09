@@ -9,22 +9,24 @@ import numpy as np
 
 # Data cleaning and data wrangling
 # Load data
-df1 = pd.read_excel('./data/2009_2021-quarterly-surgical_wait_times.xlsx')
-df2 = pd.read_excel('./data/2021_2022-quarterly-surgical_wait_times-q3-interim.xlsx')
-df = df1.append(pd.DataFrame(data = df2), ignore_index=True)
-# Cleaned column names
-df.columns=[i.lower() for i in (df.columns.values.tolist())]
-df = df.rename(columns={'fiscal_year': 'year', 
-                        'hospital_name': 'hospital',
-                       'procedure_group': 'procedure',
-                       'completed_50th_percentile': 'wait_time_50', 
-                       'completed_90th_percentile': 'wait_time_90'})
-#convert <5 string to median value of 3
-df = df.replace(['<5'],3)
-# correct datatypes of columns, simplify fiscal year to year at start of first quarter
-df.year = df.year.str.replace('(/).*', "", regex=True)
-# drop rows with NA's
-df = df.dropna()
+# df1 = pd.read_excel('./data/2009_2021-quarterly-surgical_wait_times.xlsx')
+# df2 = pd.read_excel('./data/2021_2022-quarterly-surgical_wait_times-q3-interim.xlsx')
+# df = df1.append(pd.DataFrame(data = df2), ignore_index=True)
+# # Cleaned column names
+# df.columns=[i.lower() for i in (df.columns.values.tolist())]
+# df = df.rename(columns={'fiscal_year': 'year', 
+#                         'hospital_name': 'hospital',
+#                        'procedure_group': 'procedure',
+#                        'completed_50th_percentile': 'wait_time_50', 
+#                        'completed_90th_percentile': 'wait_time_90'})
+# #convert <5 string to median value of 3
+# df = df.replace(['<5'],3)
+# # correct datatypes of columns, simplify fiscal year to year at start of first quarter
+# df.year = df.year.str.replace('(/).*', "", regex=True)
+# # drop rows with NA's
+# df = df.dropna()
+
+df = pd.read_csv('./data/data.csv')
 #create counts dataset
 count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
 #data subsetting
@@ -32,7 +34,7 @@ main = df[(df['procedure']!='All Procedures') & (df['hospital']!='All Facilities
 count  = count[(count['procedure']!='All Procedures') & (count['hospital']!='All Facilities') & (count['health_authority']!='All Health Authorities')]
 alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df['health_authority']=='All Health Authorities')]
 # Create year_quarter column
-df['Y_Q'] = df['year'].str[-2:].map(str) + '_' + df['quarter'].map(str)
+df['Y_Q'] = df['year'].astype('str').str[-2:].map(str) + '_' + df['quarter'].map(str)
 
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
