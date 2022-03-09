@@ -46,7 +46,7 @@ Improving surgical efficiency and maximizing surgical completion counts has been
 
 ## Who are we?
 
-We are a group of 4 students - [Anqi Li](https://github.com/anqiubc), [Andrew Nguyen](https://github.com/AndrewNg1891), [Kevin Rardford](https://github.com/kradford7) and [Monica Penner](https://github.com/Energix11) - in the Master of Data Science program at [UBC Okanagan](https://ok.ubc.ca/), class of 2021-2022, working on this project as a milestone for one of our courses.
+We are a group of 4 students - [Anqi Li](https://github.com/anqiubc), [Andrew Nguyen](https://github.com/AndrewNg1891), [Kevin Radford](https://github.com/kradford7) and [Monica Penner](https://github.com/Energix11) - in the Master of Data Science program at [UBC Okanagan](https://ok.ubc.ca/), class of 2021-2022, working on this project as a milestone for one of our courses.
 
 ### Team Members
 
