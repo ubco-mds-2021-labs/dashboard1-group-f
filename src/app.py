@@ -1,3 +1,4 @@
+from pydoc import classname
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
 
@@ -34,11 +35,10 @@ alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilit
 df['Y_Q'] = df['year'].str[-2:].map(str) + '_' + df['quarter'].map(str)
 
 # Declare dash app
-app = Dash(
-    __name__,
+app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
+app.config.suppress_callback_exceptions = True
 
-    external_stylesheets = [dbc.themes.MINTY]   
-)
+# Configure Altair
 alt.renderers.enable('mimetype')
 alt.data_transformers.enable('data_server')
 
@@ -239,27 +239,6 @@ t2p3=html.Iframe(
 
 )
 
-# Shared Tab Layout Components
-year_slider = html.Div([
-    dcc.RangeSlider(
-        2009, 
-        2022, 
-        1, 
-        marks={2009:'2009', 2010:'2010', 2011:'2011', 2012:'2012', 2013:'2013', 2014:'2014', 2015:'2015', 2016:'2016', 2017:'2017', 2018:'2018', 2019:'2019', 2020:'2020', 2021:'2021', 2022:'2022'}, 
-        value=[2020, 2021],
-        allowCross=False,
-        id='year-slider'
-    )
-])
-
-quarter_radio = html.Div([
-    dcc.RadioItems(
-        options=['Q1', 'Q2','Q3', 'Q4', 'All'],
-        value='All',
-        inline=True
-    )
-])
-
 # Tab 1 Layout Components
 tab1 = [
     html.Div([
@@ -272,58 +251,150 @@ tab1 = [
 # Tab 2 Layout Components
 tab2 = [
     html.Div([
-        year_slider,
         dbc.Row([
-            dbc.Col(quarter_radio, width=0.2),
             dbc.Col(t2p1, width=13)]),
         dbc.Row(dbc.Col(t2p2)),
         dbc.Row(dbc.Col(t2p3)),
             ]),
 ]
 
-# Main Layout components
-title = html.H1('BC Surgical Wait Time Dashboard')
+# Sidebar components
+title = html.H1(
+    'BC Surgical Wait Time Dashboard',
+    style = {'color': 'var(--bs-primary)'}
+)
 
-region_select = dbc.InputGroup([
-    dcc.Dropdown(
-        options = df.health_authority.unique()[1:],
-        multi = True,
-        style = {
-            'border-radius': '0.4rem 0 0 0.4rem',
-            'width': '55rem'
-        },
-        className = 'dash-bootstrap',
-        id = 'region-select'
-    ),
-    dbc.Button(
-        'Select all regions',
-        id = 'region-select-all',
-        style = {'border': '0'},
-        n_clicks = 0,
-        color = 'primary'
-    )
-])
+nav = dbc.Nav(
+    children = [
+        dbc.NavLink(
+            'Waiting and Completed Cases - Tab 1',
+            style = {'border-radius': '0.4rem 0 0 0.4rem'},
+            href = '/tab1',
+            active = 'exact'
+        ),
+        dbc.NavLink(
+            'Wait Times, 50th and 90th Percentile - Tab 2',
+            style = {'border-radius': '0.4rem 0 0 0.4rem'},
+            href = '/tab2',
+            active = 'exact'
+        )
+    ],
+    pills = True,
+    vertical = True
+)
 
+region_select = dbc.InputGroup(
+    children = [
+        dbc.Label('Health Region'),
+        dcc.Dropdown(
+            options = df.health_authority.unique()[1:],
+            multi = True,
+            style = {
+                'border-radius': '0.4rem 0.4rem 0 0',
+                'width': '100%'
+            },
+            className = 'dash-bootstrap',
+            id = 'region-select'
+        ),
+        dbc.Button(
+            'Select all regions',
+            id = 'region-select-all',
+            style = {
+                'margin': 0,
+                'border': 0,
+                'border-radius': '0 0 0.4rem 0.4rem',
+                'width': '100%'
+            },
+            n_clicks = 0,
+            color = 'primary'
+        )
+    ],
+    style = {'padding-right': '1rem'}
+)
 
-tabs = dbc.Tabs([
-    dbc.Tab(
+year_slider = html.Div(
+    children = [
+        dbc.Label('Year Range'),
+        dcc.RangeSlider(
+            2009, 
+            2022, 
+            1,
+            value = [2020, 2021],
+            marks = None,
+            allowCross=False,
+            tooltip = {'placement': 'bottom', 'always_visible': True},
+            id='year-slider'
+        )
+    ],
+    style = {'margin-top': '1rem'}
+)
 
-        children = tab1,
-        label = 'Waiting and Completed Cases -Tab 1'
-    ),
-    dbc.Tab(
-        children = tab2,
-        label = 'Wait Times, 50th and 90th percentile -Tab 2'
-    )
-])
+quarter_radio = html.Div(
+    children = [
+        dbc.Label('Quarter'),
+        dbc.RadioItems(
+            options = [
+                {'label': q, 'value': q}
+                for q in ['Q1', 'Q2', 'Q3', 'Q4', 'All']
+            ],
+            value = 'All',
+            inline = True,
+            id = 'quarter'
+        )
+    ],
+    style = {'margin-top': '1rem'}
+)
+
+sidebar = html.Div(
+    children = [
+        title,
+        html.Hr(style = {'color': 'var(--bs-primary)'}),
+        nav,
+        html.Hr(style = {'color': 'var(--bs-primary)'}),
+        region_select,
+        year_slider,
+        quarter_radio
+    ],
+    style = {
+        'position': 'fixed',
+        'top': 0,
+        'left': 0,
+        'width': '25rem',
+        'height': '100%',
+        'padding': '2rem 0 2rem 1rem'
+    },
+    className = 'bg-light'
+)
 
 # Layout
-app.layout = dbc.Container([
-    title,
-    region_select,
-    tabs
-], fluid = True)
+app.layout = dbc.Container(
+    children = [
+        dcc.Location(id = 'url'),
+        sidebar,
+        html.Div(
+            id = 'page-content',
+            style = {
+                'margin-left': '25rem',
+                'padding': '2rem 1rem'
+            }
+        )
+    ],
+    fluid = True
+)
 
+## Callback functions
+# Navigation
+@app.callback(
+    Output('page-content', 'children'),
+    Input('url', 'pathname')
+)
+def render_page_content(pathname):
+    if pathname == '/tab1':
+        return tab1
+    elif pathname == '/tab2':
+        return tab2
+
+# Settings
 @app.callback(
     Output('region-select', 'value'),
     Input('region-select-all', 'n_clicks'),
@@ -332,8 +403,7 @@ app.layout = dbc.Container([
 def select_all_regions(_, regions):
     return [region for region in regions]
 
-## Callback functions
-
+# Tabs
 @app.callback(
     Output('t1p1','srcDoc'),
     Input('region-select', 'value'))
