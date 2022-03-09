@@ -1,0 +1,7 @@
+pydoc
+dash
+dash_bootstrap_components
+altair
+pandas
+numpy
+gunicorn
