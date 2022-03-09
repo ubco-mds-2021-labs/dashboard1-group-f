@@ -39,39 +39,7 @@ df['Y_Q'] = df['year'].str[-2:].map(str) + '_' + df['quarter'].map(str)
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
 app.config.suppress_callback_exceptions = True
-
-# Configure Altair
-alt.renderers.enable('mimetype')
-alt.data_transformers.enable('data_server')
-
-## Plotting 
-# Tab 1 line plot
-def line_plot_t1(autho=["Fraser"]):
-    all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
-    data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
-    chart=alt.Chart(data).mark_line().encode(
-        x=alt.X('Y_Q', title='Year & Quarter'),
-        y=alt.Y('value',title='Number of Cases'),
-        color='variable'
-    ).properties(
-        title="Number of Waiting & Completed Cases by Time",
-        width=920,
-        height=280)
-    return chart.interactive().to_html()
-
-# Tab1-plot1: waiting & completed cases by time
-t1p1=html.Iframe(
-    id="t1p1",
-    srcDoc=line_plot_t1(),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'}
-)
-
-# Tab 1 Layout Components
-tab1 = [
-    html.Div([
-        dbc.Row(dbc.Col(t1p1))
-            ]),
-    ]
+app = app.server
 
 # Sidebar components
 title = html.H1(
@@ -197,31 +165,6 @@ app.layout = dbc.Container(
     fluid = True
 )
 
-## Callback functions
-# Navigation
-@app.callback(
-    Output('page-content', 'children'),
-    Input('url', 'pathname')
-)
-def render_page_content(pathname):
-    if pathname == '/tab1':
-        return tab1
-
-# Settings
-@app.callback(
-    Output('region-select', 'value'),
-    Input('region-select-all', 'n_clicks'),
-    State('region-select', 'options')
-)
-def select_all_regions(_, regions):
-    return [region for region in regions]
-
-# Tabs
-@app.callback(
-    Output('t1p1','srcDoc'),
-    Input('region-select', 'value'))
-def update_t1p1(autho):
-    return line_plot_t1(list(autho))
 
 if __name__ == '__main__':
     app.run_server(debug=True)
