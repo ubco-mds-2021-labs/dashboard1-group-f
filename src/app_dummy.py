@@ -26,24 +26,24 @@ import numpy as np
 # # drop rows with NA's
 # df = df.dropna()
 
-df = pd.read_csv('./data/data.csv')
-#create counts dataset
-count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
-#data subsetting
-main = df[(df['procedure']!='All Procedures') & (df['hospital']!='All Facilities') & (df['health_authority']!='All Health Authorities')]
-count  = count[(count['procedure']!='All Procedures') & (count['hospital']!='All Facilities') & (count['health_authority']!='All Health Authorities')]
-alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df['health_authority']=='All Health Authorities')]
-# Create year_quarter column
-df['Y_Q'] = df['year'].astype('str').str[-2:].map(str) + '_' + df['quarter'].map(str)
+# df = pd.read_csv('./data/data.csv')
+# #create counts dataset
+# count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
+# #data subsetting
+# main = df[(df['procedure']!='All Procedures') & (df['hospital']!='All Facilities') & (df['health_authority']!='All Health Authorities')]
+# count  = count[(count['procedure']!='All Procedures') & (count['hospital']!='All Facilities') & (count['health_authority']!='All Health Authorities')]
+# alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df['health_authority']=='All Health Authorities')]
+# # Create year_quarter column
+# df['Y_Q'] = df['year'].astype('str').str[-2:].map(str) + '_' + df['quarter'].map(str)
 
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
 app.config.suppress_callback_exceptions = True
 server = app.server
 
-# Configure Altair
-alt.renderers.enable('mimetype')
-alt.data_transformers.enable('data_server')
+# # Configure Altair
+# alt.renderers.enable('mimetype')
+# alt.data_transformers.enable('data_server')
 
 # ## Plotting 
 # # Tab 1 line plot
@@ -286,34 +286,34 @@ nav = dbc.Nav(
     vertical = True
 )
 
-region_select = dbc.InputGroup(
-    children = [
-        dbc.Label('Health Region'),
-        dcc.Dropdown(
-            options = df.health_authority.unique()[1:],
-            multi = True,
-            style = {
-                'border-radius': '0.4rem 0.4rem 0 0',
-                'width': '100%'
-            },
-            className = 'dash-bootstrap',
-            id = 'region-select'
-        ),
-        dbc.Button(
-            'Select all regions',
-            id = 'region-select-all',
-            style = {
-                'margin': 0,
-                'border': 0,
-                'border-radius': '0 0 0.4rem 0.4rem',
-                'width': '100%'
-            },
-            n_clicks = 0,
-            color = 'primary'
-        )
-    ],
-    style = {'padding-right': '1rem'}
-)
+# region_select = dbc.InputGroup(
+#     children = [
+#         dbc.Label('Health Region'),
+#         dcc.Dropdown(
+#             options = df.health_authority.unique()[1:],
+#             multi = True,
+#             style = {
+#                 'border-radius': '0.4rem 0.4rem 0 0',
+#                 'width': '100%'
+#             },
+#             className = 'dash-bootstrap',
+#             id = 'region-select'
+#         ),
+#         dbc.Button(
+#             'Select all regions',
+#             id = 'region-select-all',
+#             style = {
+#                 'margin': 0,
+#                 'border': 0,
+#                 'border-radius': '0 0 0.4rem 0.4rem',
+#                 'width': '100%'
+#             },
+#             n_clicks = 0,
+#             color = 'primary'
+#         )
+#     ],
+#     style = {'padding-right': '1rem'}
+# )
 
 year_slider = html.Div(
     children = [
@@ -354,7 +354,7 @@ sidebar = html.Div(
         html.Hr(style = {'color': 'var(--bs-primary)'}),
         nav,
         html.Hr(style = {'color': 'var(--bs-primary)'}),
-        region_select,
+        # region_select,
         year_slider,
         quarter_radio
     ],
@@ -387,27 +387,27 @@ app.layout = dbc.Container(
 
 ## Callback functions
 # Navigation
-@app.callback(
-    Output('page-content', 'children'),
-    Input('url', 'pathname')
-)
-def render_page_content(pathname):
-    # if pathname == '/tab1':
-    #     return tab1
-    # elif pathname == '/tab2':
-    #     return tab2
-    # else:
-        return html.H1('Welcome')
+# @app.callback(
+#     Output('page-content', 'children'),
+#     Input('url', 'pathname')
+# )
+# def render_page_content(pathname):
+#     # if pathname == '/tab1':
+#     #     return tab1
+#     # elif pathname == '/tab2':
+#     #     return tab2
+#     # else:
+#         return html.H1('Welcome')
 
-# Settings
-@app.callback(
-    Output('region-select', 'value'),
-    Input('region-select-all', 'n_clicks'),
-    State('region-select', 'options')
-)
-def select_all_regions(_, regions):
-    return [region for region in regions]
-
+# # Settings
+# @app.callback(
+#     Output('region-select', 'value'),
+#     Input('region-select-all', 'n_clicks'),
+#     State('region-select', 'options')
+# )
+# def select_all_regions(_, regions):
+#     return [region for region in regions]
+# 
 # # Tabs
 # @app.callback(
 #     Output('t1p1','srcDoc'),
