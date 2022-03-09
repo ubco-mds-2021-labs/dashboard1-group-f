@@ -39,7 +39,7 @@ df['Y_Q'] = df['year'].str[-2:].map(str) + '_' + df['quarter'].map(str)
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
 app.config.suppress_callback_exceptions = True
-app = app.server
+server = app.server
 
 # Sidebar components
 title = html.H1(
