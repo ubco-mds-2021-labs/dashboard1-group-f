@@ -68,7 +68,7 @@ We are a group of 4 students - [Anqi Li](https://github.com/anqiubc), [Andrew Ng
 The app uses six radio buttons to delivery corresponding information for the six health authorities. We designed two tabs to display of our data and variables. The first tab provides summary information about the number of waiting and completed cases.  The second tab provides information on average wait times, both for 50% and 90% of cases completed.  Data is displayed by hospital and by procedure and can be visualized over selected years and across any or all of the fiscal quarters.
 
 
-![](docs/sketch/surgical-dashboard.gif =250x)
+![](docs/sketch/surgical-dashboard.gif =250x250)
 
 ## Describe the dataset
 
