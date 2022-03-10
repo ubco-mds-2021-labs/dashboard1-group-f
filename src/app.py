@@ -337,8 +337,8 @@ sidebar = html.Div(
         nav,
         html.Hr(style = {'color': 'var(--bs-primary)'}),
         region_select,
-        year_slider,
-        quarter_radio
+        # year_slider,
+        # quarter_radio
     ],
     style = {
         'position': 'fixed',
@@ -379,7 +379,7 @@ def render_page_content(pathname):
     elif pathname == '/tab2':
         return tab2
     else:
-        return html.H1('Welcome')
+        return html.H1('Welcome!', style={'color': 'var(--bs-primary)'})
 
 # Settings
 @app.callback(
