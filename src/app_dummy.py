@@ -42,23 +42,23 @@ app.config.suppress_callback_exceptions = True
 server = app.server
 
 # Configure Altair
-alt.renderers.enable('mimetype')
-alt.data_transformers.enable('data_server')
+# alt.renderers.enable('mimetype')
+# alt.data_transformers.enable('data_server')
 
-# ## Plotting 
-# # Tab 1 line plot
-# def line_plot_t1(autho=["Fraser"]):
-#     all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
-#     data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
-#     chart=alt.Chart(data).mark_line().encode(
-#         x=alt.X('Y_Q', title='Year & Quarter'),
-#         y=alt.Y('value',title='Number of Cases'),
-#         color='variable'
-#     ).properties(
-#         title="Number of Waiting & Completed Cases by Time",
-#         width=920,
-#         height=280)
-#     return chart.interactive().to_html()
+## Plotting 
+# Tab 1 line plot
+def line_plot_t1(autho=["Fraser"]):
+    all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
+    data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
+    chart=alt.Chart(data).mark_line().encode(
+        x=alt.X('Y_Q', title='Year & Quarter'),
+        y=alt.Y('value',title='Number of Cases'),
+        color='variable'
+    ).properties(
+        title="Number of Waiting & Completed Cases by Time",
+        width=920,
+        height=280)
+    return chart.interactive().to_html()
 
 # # Tab 2 line plot
 # def line_plot_t2(autho=["Fraser"]):
