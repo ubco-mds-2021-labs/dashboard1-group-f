@@ -242,24 +242,26 @@ server = app.server
 
 # )
 
-# # Tab 1 Layout Components
-# tab1 = [
-#     html.Div([
-#         dbc.Row(dbc.Col(t1p1)),
-#         dbc.Row(dbc.Col(t1p2)),
-#         dbc.Row(dbc.Col(t1p3)),
-#             ]),
-#     ]
+# Tab 1 Layout Components
+tab1 = [
+    html.Div([
+        html.H1('TAB 1')
+        # dbc.Row(dbc.Col(t1p1)),
+        # dbc.Row(dbc.Col(t1p2)),
+        # dbc.Row(dbc.Col(t1p3)),
+            ]),
+    ]
 
-# # Tab 2 Layout Components
-# tab2 = [
-#     html.Div([
-#         dbc.Row([
-#             dbc.Col(t2p1, width=13)]),
-#         dbc.Row(dbc.Col(t2p2)),
-#         dbc.Row(dbc.Col(t2p3)),
-#             ]),
-# ]
+# Tab 2 Layout Components
+tab2 = [
+    html.Div([
+        html.H1('TAB 2')
+        # dbc.Row([
+        #     dbc.Col(t2p1, width=13)]),
+        # dbc.Row(dbc.Col(t2p2)),
+        # dbc.Row(dbc.Col(t2p3)),
+            ]),
+]
 
 # Sidebar components
 title = html.H1(
@@ -393,11 +395,9 @@ app.layout = dbc.Container(
 )
 def render_page_content(pathname):
     if pathname == '/tab1':
-        # return tab1
-        return html.H1('Tab1')
+        return tab1
     elif pathname == '/tab2':
-        # return tab2
-        return html.H1('Tab2')
+        return tab2
     else:
         # return html.H1('Welcome')
         return html.H1(pathname)
