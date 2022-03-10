@@ -21,12 +21,13 @@ df['Y_Q'] = df['year'].astype('str').str[-2:].map(str) + '_' + df['quarter'].map
 
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
-app.config.suppress_callback_exceptions = True
+# app.config.suppress_callback_exceptions = True
 server = app.server
 
 # Configure Altair - uncomment to run locally, comment out for Heroku deployment
 # alt.renderers.enable('mimetype')
 # alt.data_transformers.enable('data_server')
+alt.data_transformers.disable_max_rows()
 
 ## Plotting 
 # Tab 1 line plot
@@ -228,8 +229,8 @@ t2p3=html.Iframe(
 tab1 = [
     html.Div([
         dbc.Row(dbc.Col(t1p1)),
-        # dbc.Row(dbc.Col(t1p2)),
-        # dbc.Row(dbc.Col(t1p3)),
+        dbc.Row(dbc.Col(t1p2)),
+        dbc.Row(dbc.Col(t1p3)),
             ]),
     ]
 
@@ -239,7 +240,7 @@ tab2 = [
         dbc.Row([
             dbc.Col(t2p1, width=13)]),
         dbc.Row(dbc.Col(t2p2)),
-        # dbc.Row(dbc.Col(t2p3)),
+        dbc.Row(dbc.Col(t2p3)),
             ]),
 ]
 
