@@ -245,8 +245,7 @@ t1p1=html.Iframe(
 # Tab 1 Layout Components
 tab1 = [
     html.Div([
-        html.H1('TAB 1')
-        # dbc.Row(dbc.Col(t1p1)),
+        dbc.Row(dbc.Col(t1p1)),
         # dbc.Row(dbc.Col(t1p2)),
         # dbc.Row(dbc.Col(t1p3)),
             ]),
