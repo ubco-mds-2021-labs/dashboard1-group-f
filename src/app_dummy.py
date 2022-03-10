@@ -399,15 +399,15 @@ app.layout = dbc.Container(
 #     # else:
 #         return html.H1('Welcome')
 
-# # Settings
-# @app.callback(
-#     Output('region-select', 'value'),
-#     Input('region-select-all', 'n_clicks'),
-#     State('region-select', 'options')
-# )
-# def select_all_regions(_, regions):
-#     return [region for region in regions]
-# 
+# Settings
+@app.callback(
+    Output('region-select', 'value'),
+    Input('region-select-all', 'n_clicks'),
+    State('region-select', 'options')
+)
+def select_all_regions(_, regions):
+    return [region for region in regions]
+
 # # Tabs
 # @app.callback(
 #     Output('t1p1','srcDoc'),
