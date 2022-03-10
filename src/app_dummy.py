@@ -392,12 +392,14 @@ app.layout = dbc.Container(
     Input('url', 'pathname')
 )
 def render_page_content(pathname):
-    # if pathname == '/tab1':
-    #     return tab1
-    # elif pathname == '/tab2':
-    #     return tab2
-    # else:
-    return html.H1('Welcome')
+    if pathname == '/tab1':
+        # return tab1
+        return html.H1('Tab1')
+    elif pathname == '/tab2':
+        # return tab2
+        return html.H1('Tab2')
+    else:
+        return html.H1('Welcome')
 
 # Settings
 @app.callback(
