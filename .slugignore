@@ -1,0 +1,7 @@
+*.xlsx
+*.md
+*.ipynb
+/assets
+/docs
+/previousWork
+/data/data_wrangle.py
