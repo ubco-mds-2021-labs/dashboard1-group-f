@@ -2,7 +2,12 @@
 
 ***Purpose: To support improvements in surgical efficiencies and throughput within British Columbia's surgical system using data visualization.***
 
-* Deloyed badge with link 
+#### Deployed dash app links:
+
+* Anqi: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)]()
+* Andrew: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://bc-surgical-wait-times-andrew.herokuapp.com/)
+* Monica: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)]()
+* Kevin: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://bc-surgical-wait-times.herokuapp.com/)
 
 ## Welcome to our project!
 
@@ -60,11 +65,10 @@ We are a group of 4 students - [Anqi Li](https://github.com/anqiubc), [Andrew Ng
 
 ## About this Dashboard
 
-The app uses six radio buttons to delivery corresponding information for the six health authorities. We designed two tabs to display of our data and variables. The first tab provides summary information about the number of waiting and completed cases.  The second tab provides information on average wait times, both for 50% and 90% of cases completed.  Data is displayed by hospital and by procedure and can be visualized over selected years and across any or all of the fiscal quarters. 
-| | |
-|:-------------------------:|:------------------------:|
-![Tab 1](docs/sketch/Tab1.JPG) | ![Tab 2](docs/sketch/Tab2.JPG)
-![Tab 3](docs/sketch/Tab3.JPG) | ![Tab 3](docs/sketch/Tab4.JPG)
+The app uses six radio buttons to delivery corresponding information for the six health authorities. We designed two tabs to display of our data and variables. The first tab provides summary information about the number of waiting and completed cases.  The second tab provides information on average wait times, both for 50% and 90% of cases completed.  Data is displayed by hospital and by procedure and can be visualized over selected years and across any or all of the fiscal quarters.
+
+
+![](docs/sketch/surgical-dashboard.gif)
 
 ## Describe the dataset
 
@@ -119,3 +123,4 @@ We'd love to hear from you if you have a problem or a suggestion for improvement
 
 ## Acknowledgements and references 
 
+Data in this project sourced from: [British Columbia's Government](https://catalogue.data.gov.bc.ca/dataset/bc-surgical-wait-times/resource/f294562c-a6fd-4d7f-8f99-c51c91891c67)
