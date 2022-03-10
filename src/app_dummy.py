@@ -387,17 +387,17 @@ app.layout = dbc.Container(
 
 ## Callback functions
 # Navigation
-# @app.callback(
-#     Output('page-content', 'children'),
-#     Input('url', 'pathname')
-# )
-# def render_page_content(pathname):
-#     # if pathname == '/tab1':
-#     #     return tab1
-#     # elif pathname == '/tab2':
-#     #     return tab2
-#     # else:
-#         return html.H1('Welcome')
+@app.callback(
+    Output('page-content', 'children'),
+    Input('url', 'pathname')
+)
+def render_page_content(pathname):
+    # if pathname == '/tab1':
+    #     return tab1
+    # elif pathname == '/tab2':
+    #     return tab2
+    # else:
+    return html.H1('Welcome')
 
 # Settings
 @app.callback(
