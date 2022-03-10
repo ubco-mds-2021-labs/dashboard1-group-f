@@ -106,36 +106,36 @@ def line_plot_t2(autho=["Fraser"]):
 #     ).to_html()
 #     return chart_sbs
 
-# # Tab 2 side by side bar plot for procedures
-# def plot_bar_sbs_procedure_t2(autho=["Fraser"]):
-#     subdata=main[main.health_authority.isin(autho)]
-#     top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
-#     subdata_top=subdata[subdata["procedure"].isin(top)]
-#     chart1 = alt.Chart(subdata_top).mark_tick().encode(
-#             x=alt.X('mean(wait_time_50):Q',title="Wait Time (weeks)"),
-#             y=alt.Y("procedure", sort='-x',title="Procedure"),
-#             color=alt.Color('year')
-#         ).properties(
-#             title="Waiting Times for 50 percent of Cases by Procedure",
-#             width=200,
-#             height=300
-#         ).interactive()
-#     top2=subdata.groupby(["procedure"])[["wait_time_90"]].mean().reset_index().sort_values(by=['wait_time_90'], ascending=False).head(20)["procedure"].tolist()
-#     subdata_top2=subdata[subdata["procedure"].isin(top2)]
-#     chart2 = alt.Chart(subdata_top2).mark_tick().encode(
-#             x=alt.X('mean(wait_time_90):Q',title="Wait Time (weeks)"),
-#             y=alt.Y("procedure", sort='-x',title="Procedure"),
-#             color=alt.Color('year')
-#         ).properties(
-#             title="Waiting Times for 90 percent of Cases by Procedure",
-#             width=200,
-#             height=300
-#         ).interactive()
-#     chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
-#         labelFontSize=10,
-#         titleFontSize=10
-#     ).to_html()
-#     return chart_sbs
+# Tab 2 side by side bar plot for procedures
+def plot_bar_sbs_procedure_t2(autho=["Fraser"]):
+    subdata=main[main.health_authority.isin(autho)]
+    top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
+    subdata_top=subdata[subdata["procedure"].isin(top)]
+    chart1 = alt.Chart(subdata_top).mark_tick().encode(
+            x=alt.X('mean(wait_time_50):Q',title="Wait Time (weeks)"),
+            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            color=alt.Color('year')
+        ).properties(
+            title="Waiting Times for 50 percent of Cases by Procedure",
+            width=200,
+            height=300
+        ).interactive()
+    top2=subdata.groupby(["procedure"])[["wait_time_90"]].mean().reset_index().sort_values(by=['wait_time_90'], ascending=False).head(20)["procedure"].tolist()
+    subdata_top2=subdata[subdata["procedure"].isin(top2)]
+    chart2 = alt.Chart(subdata_top2).mark_tick().encode(
+            x=alt.X('mean(wait_time_90):Q',title="Wait Time (weeks)"),
+            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            color=alt.Color('year')
+        ).properties(
+            title="Waiting Times for 90 percent of Cases by Procedure",
+            width=200,
+            height=300
+        ).interactive()
+    chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
+        labelFontSize=10,
+        titleFontSize=10
+    ).to_html()
+    return chart_sbs
 
 # # Tab 1 side by side bar plot for hospital
 # def plot_bar_sbs_hospital_t1(autho=["Fraser"]):
@@ -220,12 +220,12 @@ t2p1=html.Iframe(
 #     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 # )
 
-# # Tab2-plot2: wait times (50th and 90th percentile) by procedure
-# t2p2=html.Iframe(
-#     id="t2p2",
-#     srcDoc=plot_bar_sbs_procedure_t2(autho=["Fraser"]),
-#     style={'border-width': '0', 'width': '100%', 'height': '400px'}
-# )
+# Tab2-plot2: wait times (50th and 90th percentile) by procedure
+t2p2=html.Iframe(
+    id="t2p2",
+    srcDoc=plot_bar_sbs_procedure_t2(autho=["Fraser"]),
+    style={'border-width': '0', 'width': '100%', 'height': '400px'}
+)
 
 # # Tab1-plot3: waiting and completed cases by hospital
 # t1p3=html.Iframe(
@@ -257,7 +257,7 @@ tab2 = [
         # html.H1('TAB 2')
         dbc.Row([
             dbc.Col(t2p1, width=13)]),
-        # dbc.Row(dbc.Col(t2p2)),
+        dbc.Row(dbc.Col(t2p2)),
         # dbc.Row(dbc.Col(t2p3)),
             ]),
 ]
@@ -426,11 +426,11 @@ def update_t2p1(autho):
 #     Input('region-select', 'value'))
 # def update_t1p2(autho):
 #     return plot_bar_sbs_procedure_t1(list(autho))
-# @app.callback(
-#     Output('t2p2','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_t2p2(autho):
-#     return plot_bar_sbs_procedure_t2(list(autho))
+@app.callback(
+    Output('t2p2','srcDoc'),
+    Input('region-select', 'value'))
+def update_t2p2(autho):
+    return plot_bar_sbs_procedure_t2(list(autho))
 # @app.callback(
 #     Output('t1p3','srcDoc'),
 #     Input('region-select', 'value'))
