@@ -199,12 +199,12 @@ def line_plot_t1(autho=["Fraser"]):
 #     ).to_html()
 #     return chart_sbs
 
-# # Tab1-plot1: waiting & completed cases by time
-# t1p1=html.Iframe(
-#     id="t1p1",
-#     srcDoc=line_plot_t1(),
-#     style={'border-width': '0', 'width': '100%', 'height': '400px'}
-# )
+# Tab1-plot1: waiting & completed cases by time
+t1p1=html.Iframe(
+    id="t1p1",
+    srcDoc=line_plot_t1(),
+    style={'border-width': '0', 'width': '100%', 'height': '400px'}
+)
 
 # # Tab2-plot1: wait times (50th and 90th percentile) by time
 # t2p1=html.Iframe(
