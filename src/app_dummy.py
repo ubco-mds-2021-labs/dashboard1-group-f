@@ -410,12 +410,12 @@ def render_page_content(pathname):
 def select_all_regions(_, regions):
     return [region for region in regions]
 
-# # Tabs
-# @app.callback(
-#     Output('t1p1','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_t1p1(autho):
-#     return line_plot_t1(list(autho))
+# Tabs
+@app.callback(
+    Output('t1p1','srcDoc'),
+    Input('region-select', 'value'))
+def update_t1p1(autho):
+    return line_plot_t1(list(autho))
 # @app.callback(
 #     Output('t2p1','srcDoc'),
 #     Input('region-select', 'value'))
