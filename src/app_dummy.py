@@ -41,9 +41,9 @@ app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
 app.config.suppress_callback_exceptions = True
 server = app.server
 
-# # Configure Altair
-# alt.renderers.enable('mimetype')
-# alt.data_transformers.enable('data_server')
+# Configure Altair
+alt.renderers.enable('mimetype')
+alt.data_transformers.enable('data_server')
 
 # ## Plotting 
 # # Tab 1 line plot
