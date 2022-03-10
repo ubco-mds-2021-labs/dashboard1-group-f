@@ -286,34 +286,34 @@ nav = dbc.Nav(
     vertical = True
 )
 
-# region_select = dbc.InputGroup(
-#     children = [
-#         dbc.Label('Health Region'),
-#         dcc.Dropdown(
-#             options = df.health_authority.unique()[1:],
-#             multi = True,
-#             style = {
-#                 'border-radius': '0.4rem 0.4rem 0 0',
-#                 'width': '100%'
-#             },
-#             className = 'dash-bootstrap',
-#             id = 'region-select'
-#         ),
-#         dbc.Button(
-#             'Select all regions',
-#             id = 'region-select-all',
-#             style = {
-#                 'margin': 0,
-#                 'border': 0,
-#                 'border-radius': '0 0 0.4rem 0.4rem',
-#                 'width': '100%'
-#             },
-#             n_clicks = 0,
-#             color = 'primary'
-#         )
-#     ],
-#     style = {'padding-right': '1rem'}
-# )
+region_select = dbc.InputGroup(
+    children = [
+        dbc.Label('Health Region'),
+        dcc.Dropdown(
+            options = df.health_authority.unique()[1:],
+            multi = True,
+            style = {
+                'border-radius': '0.4rem 0.4rem 0 0',
+                'width': '100%'
+            },
+            className = 'dash-bootstrap',
+            id = 'region-select'
+        ),
+        dbc.Button(
+            'Select all regions',
+            id = 'region-select-all',
+            style = {
+                'margin': 0,
+                'border': 0,
+                'border-radius': '0 0 0.4rem 0.4rem',
+                'width': '100%'
+            },
+            n_clicks = 0,
+            color = 'primary'
+        )
+    ],
+    style = {'padding-right': '1rem'}
+)
 
 year_slider = html.Div(
     children = [
@@ -354,7 +354,7 @@ sidebar = html.Div(
         html.Hr(style = {'color': 'var(--bs-primary)'}),
         nav,
         html.Hr(style = {'color': 'var(--bs-primary)'}),
-        # region_select,
+        region_select,
         year_slider,
         quarter_radio
     ],
