@@ -1,15 +1,20 @@
 from pydoc import classname
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
+from pathlib import Path
 
 import dash_bootstrap_components as dbc
 import altair as alt
 import pandas as pd
 import numpy as np
 
+
 # Data cleaning and data wrangling
 # Load data
-df = pd.read_csv('./data/data.csv')
+root_dir = Path(__file__).parent.parent
+data_file = root_dir.joinpath('data/processed/data.csv')
+df = pd.read_csv(data_file)
+
 #create counts dataset
 count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
 #data subsetting
@@ -25,8 +30,8 @@ app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
 server = app.server
 
 # Configure Altair - uncomment to run locally, comment out for Heroku deployment
-# alt.renderers.enable('mimetype')
-# alt.data_transformers.enable('data_server')
+alt.renderers.enable('mimetype')
+alt.data_transformers.enable('data_server')
 alt.data_transformers.disable_max_rows()
 
 ## Plotting 
