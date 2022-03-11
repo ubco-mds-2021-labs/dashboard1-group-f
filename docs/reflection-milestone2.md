@@ -24,7 +24,7 @@ We are proud to present a dashboard that graphically represents the surgical sys
 | Tabs -Hospital dropdown|Improved search function |March 4|March 7||generally already captured in top 20 results, defer to milestone 3|
 | Sidebar Layout |function & aesthetics| March 5 | March 6 | March 8|Need to link slidebar and radiobuttons to plots|
 | Sidebar -Range slider |Improve fitler|March 5|March 6||hashed out|
-| Sidebar -Quarter buttons |Improve filter|March 5| March 6|hashed out|
+| Sidebar -Quarter buttons |Improve filter|March 5| March 6||hashed out|
 | Populate first page|Orient user|March 7|March 8 ||Still in discussion re: landing page vs tab1|
 | Landing -Basic|Intro for first time users|March 2|||Not necessary for intended users who will be using this page regularly|
 | Landing -Written info|Provides background|March 2|||Background info not necessary for target audience but would |
