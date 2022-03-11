@@ -6,7 +6,7 @@
 
 * Anqi: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://anqilidashtest2.herokuapp.com/)
 * Andrew: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://bc-surgical-wait-times-andrew.herokuapp.com/)
-* Monica: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)]()
+* Monica: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://data551groupfmonica.herokuapp.com)
 * Kevin: [![](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://bc-surgical-wait-times.herokuapp.com/)
 
 ## Welcome to our project!
@@ -67,8 +67,7 @@ We are a group of 4 students - [Anqi Li](https://github.com/anqiubc), [Andrew Ng
 
 The app uses six radio buttons to delivery corresponding information for the six health authorities. We designed two tabs to display of our data and variables. The first tab provides summary information about the number of waiting and completed cases.  The second tab provides information on average wait times, both for 50% and 90% of cases completed.  Data is displayed by hospital and by procedure and can be visualized over selected years and across any or all of the fiscal quarters.
 
-
-![](docs/sketch/surgical-dashboard.gif)
+<img src="docs/sketch/surgical-dashboard.gif" width="750"/>
 
 ## Describe the dataset
 
