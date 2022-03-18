@@ -1,7 +1,8 @@
 ## Plotting 
 # Waiting and completed case count line plot
-def line_plot_tc(autho=["Fraser"]):
-    all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
+def line_plot_tc(autho=):
+    #all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
+    #all_by_autho = just call correct df that is loaded on app.py 
     data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
         x=alt.X('Y_Q', title='Year & Quarter'),
@@ -16,6 +17,7 @@ def line_plot_tc(autho=["Fraser"]):
 
 # Waiting and completed case count side by side bar plot by procedures
 def plot_bar_sbs_procedure_tc(autho=["Fraser"]):
+    #not calling count but specific csv based on autho
     subdata=count[count.health_authority.isin(autho)]
     top=subdata.groupby(["procedure"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
@@ -47,6 +49,7 @@ def plot_bar_sbs_procedure_tc(autho=["Fraser"]):
 
 # Waiting and completed case count side by side bar plot by hospital
 def plot_bar_sbs_hospital_tc(autho=["Fraser"]):
+    #not calling count but specific csv based on autho
     subdata=count[count.health_authority.isin(autho)]
     top=subdata.groupby(["hospital"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]

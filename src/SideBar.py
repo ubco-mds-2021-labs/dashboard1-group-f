@@ -6,12 +6,12 @@ title = html.H1(
 
 nav = dbc.Nav(
     children = [
-        # dbc.NavLink(
-        #     'Summary',
-        #     style = {'border-radius': '0.4rem 0 0 0.4rem'},
-        #     href = '/summary_tab',
-        #     active = 'exact'
-        # ),
+         dbc.NavLink(
+             'Summary',
+             style = {'border-radius': '0.4rem 0 0 0.4rem'},
+             href = '/summary_tab',
+             active = 'exact'
+         ),
         dbc.NavLink(
             'Waiting and Completed Cases by Procedure',
             style = {'border-radius': '0.4rem 0 0 0.4rem'},

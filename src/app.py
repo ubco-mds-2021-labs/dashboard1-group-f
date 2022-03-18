@@ -16,9 +16,24 @@ import TimesTab.py
 
 
 # Load data
-root_dir = Path(__file__).parent.parent
-data_file = root_dir.joinpath('data/processed/data.csv')
-df = pd.read_csv(data_file)
+# Data for first plot 
+df_all = pd.read_csv('data/processed/all_data.csv')
+fraser_all = pd.read_csv('data/processed/all_fraser.csv')
+interior_all = pd.read_csv('data/processed/all_interior.csv')
+northern_all = pd.read_csv('data/processed/all_nothern.csv')
+psha_all = pd.read_csv('data/processed/all_psha.csv')
+vc_all = pd.read_csv('data/processed/all_vancouver_coastal.csv')
+vi_all = pd.read_csv('data/processed/all_vancouver_island.csv')
+
+# Data for plots by hospital and procedure
+df_main = pd.read_csv('data/processed/main_data.csv')
+fraser = pd.read_csv('data/processed/fraser.csv')
+interior = pd.read_csv('data/processed/interior.csv')
+northern = pd.read_csv('data/processed/northern.csv')
+psha = pd.read_csv('data/processed/psha.csv')
+vc = pd.read_csv('data/processed/vancouver_coastal.csv')
+vi = pd.read_csv('data/processed/vancouver_island.csv')
+
 
 
 

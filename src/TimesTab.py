@@ -1,7 +1,8 @@
 
 # Wait times line plot
-def line_plot_tt(autho=["Fraser"]):
-    all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
+def line_plot_tt(autho=default csv variable):
+    #done in csvall_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
+    all_by_autho = specific csv variable based on select
     data=all_by_autho.groupby(['Y_Q'])[["wait_time_50","wait_time_90"]].mean().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
         x=alt.X('Y_Q', title='Year & Quarter'),
@@ -16,6 +17,7 @@ def line_plot_tt(autho=["Fraser"]):
 
 # Wait times side by side bar plot for procedures
 def plot_bar_sbs_procedure_tt(autho=["Fraser"]):
+    #not calling main but specific csv variable based on autho
     subdata=main[main.health_authority.isin(autho)]
     top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
@@ -47,6 +49,7 @@ def plot_bar_sbs_procedure_tt(autho=["Fraser"]):
 
 # Wait times side by side bar plot for hospital
 def plot_bar_sbs_hospital_tt(autho=["Fraser"]):
+    #not calling main but specific csv variable based on autho
     subdata=main[main.health_authority.isin(autho)]
     top=subdata.groupby(["hospital"])[["wait_time_90"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
