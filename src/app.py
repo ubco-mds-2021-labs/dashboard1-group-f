@@ -15,8 +15,6 @@ import TimesTab.py
 
 
 
-
-# Data cleaning and data wrangling
 # Load data
 root_dir = Path(__file__).parent.parent
 data_file = root_dir.joinpath('data/processed/data.csv')
