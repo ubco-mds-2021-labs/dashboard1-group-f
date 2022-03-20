@@ -8,21 +8,70 @@ import altair as alt
 import pandas as pd
 import numpy as np
 
+import SideBar.py
+import SummaryTab.py
+import CountTab.py
+import TimesTab.py
 
-# Data cleaning and data wrangling
 # Load data
-root_dir = Path(__file__).parent.parent
-data_file = root_dir.joinpath('data/processed/data.csv')
-df = pd.read_csv(data_file)
+# Data for first plot 
+df_all = pd.read_csv('data/processed/all_data.csv')
+fraser_all = pd.read_csv('data/processed/all_fraser.csv')
+interior_all = pd.read_csv('data/processed/all_interior.csv')
+northern_all = pd.read_csv('data/processed/all_northern.csv')
+psha_all = pd.read_csv('data/processed/all_psha.csv')
+vc_all = pd.read_csv('data/processed/all_vancouver_coastal.csv')
+vi_all = pd.read_csv('data/processed/all_vancouver_island.csv')
 
-#create counts dataset
-count = df.drop(["wait_time_50","wait_time_90"], axis=1,inplace=False).dropna()
-#data subsetting
-main = df[(df['procedure']!='All Procedures') & (df['hospital']!='All Facilities') & (df['health_authority']!='All Health Authorities')]
-count  = count[(count['procedure']!='All Procedures') & (count['hospital']!='All Facilities') & (count['health_authority']!='All Health Authorities')]
-alldata = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df['health_authority']=='All Health Authorities')]
-# Create year_quarter column
-df['Y_Q'] = df['year'].astype('str').str[-2:].map(str) + '_' + df['quarter'].map(str)
+# Data for plots by hospital and procedure
+df_main = pd.read_csv('data/processed/main_data.csv')
+fraser = pd.read_csv('data/processed/fraser.csv')
+interior = pd.read_csv('data/processed/interior.csv')
+northern = pd.read_csv('data/processed/northern.csv')
+psha = pd.read_csv('data/processed/psha.csv')
+vc = pd.read_csv('data/processed/vancouver_coastal.csv')
+vi = pd.read_csv('data/processed/vancouver_island.csv')
+# add the Y_Q column and fix the year problem
+def add_Y_Q(df):
+    df['Y_Q']= df['year'].astype('str').str[2:4].map(str) + '_' + df['quarter'].map(str)
+    df['year']= df['year'].astype('str').str[0:4].map(str)
+dflist=[df_all,fraser_all,interior_all,northern_all,psha_all,vc_all,vi_all,df_main,fraser,interior,northern,psha,vc,vi]
+for item in dflist:
+    add_Y_Q(item)
+# dataframe selection function: 
+def region_df(region="All",alldata=False):
+    if alldata==True: #alldata: data for first plot
+        if region=="All":
+            return df_all
+        elif region=="Fraser":
+            return fraser_all
+        elif region=="Interior":
+            return interior_all
+        elif region=="Northern":
+            return northern_all
+        elif region=="Provincial Health Services Authority":
+            return psha_all
+        elif region=="Vancouver Coastal":
+            return vc_all
+        elif region=="Vancouver Island":
+            return vi_all
+    elif alldata==False:
+        if region=="All":
+            return df_main
+        elif region=="Fraser":
+            return fraser
+        elif region=="Interior":
+            return interior
+        elif region=="Northern":
+            return northern
+        elif region=="Provincial Health Services Authority":
+            return psha
+        elif region=="Vancouver Coastal":
+            return vc
+        elif region=="Vancouver Island":
+            return vi
+    else:
+        return None
 
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
@@ -33,329 +82,6 @@ server = app.server
 alt.renderers.enable('mimetype')
 alt.data_transformers.enable('data_server')
 alt.data_transformers.disable_max_rows()
-
-## Plotting 
-# Tab 1 line plot
-def line_plot_t1(autho=["Fraser"]):
-    all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
-    data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
-    chart=alt.Chart(data).mark_line().encode(
-        x=alt.X('Y_Q', title='Year & Quarter'),
-        y=alt.Y('value',title='Number of Cases'),
-        color='variable'
-    ).properties(
-        title="Number of Waiting & Completed Cases by Time",
-        width=920,
-        height=280)
-    return chart.interactive().to_html()
-
-# Tab 2 line plot
-def line_plot_t2(autho=["Fraser"]):
-    all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
-    data=all_by_autho.groupby(['Y_Q'])[["wait_time_50","wait_time_90"]].mean().reset_index().melt('Y_Q')
-    chart=alt.Chart(data).mark_line().encode(
-        x=alt.X('Y_Q', title='Year & Quarter'),
-        y=alt.Y('value',title='Wait Time (weeks'),
-        color='variable'
-    ).properties(
-        title="50th and 90th Percentile Waiting Times",
-        width=920,
-        height=280)
-    return chart.interactive().to_html()
-
-
-# Tab 1 side by side bar plot for procedures
-def plot_bar_sbs_procedure_t1(autho=["Fraser"]):
-    subdata=count[count.health_authority.isin(autho)]
-    top=subdata.groupby(["procedure"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["procedure"].tolist()
-    subdata_top=subdata[subdata["procedure"].isin(top)]
-    chart1 = alt.Chart(subdata_top).mark_bar().encode(
-            x=alt.X('sum(waiting):Q',title="Total Waiting Cases"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
-            color=alt.Color('year')
-        ).properties(
-            title="Number of Waiting Cases for Different Procedure Groups",
-            width=200,
-            height=300
-        ).interactive()
-    top2=subdata.groupby(["procedure"])[["completed"]].sum().reset_index().sort_values(by=['completed'], ascending=False).head(20)["procedure"].tolist()
-    subdata_top2=subdata[subdata["procedure"].isin(top2)]
-    chart2 = alt.Chart(subdata_top2).mark_bar().encode(
-            x=alt.X('sum(completed):Q',title="Total Completed Cases"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
-            color=alt.Color('year')
-        ).properties(
-            title="Number of Completed Cases for Different Procedure Groups",
-            width=200,
-            height=300
-        ).interactive()
-    chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
-        labelFontSize=10,
-        titleFontSize=10
-    ).to_html()
-    return chart_sbs
-
-# Tab 2 side by side bar plot for procedures
-def plot_bar_sbs_procedure_t2(autho=["Fraser"]):
-    subdata=main[main.health_authority.isin(autho)]
-    top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
-    subdata_top=subdata[subdata["procedure"].isin(top)]
-    chart1 = alt.Chart(subdata_top).mark_tick().encode(
-            x=alt.X('mean(wait_time_50):Q',title="Wait Time (weeks)"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
-            color=alt.Color('year')
-        ).properties(
-            title="Waiting Times for 50 percent of Cases by Procedure",
-            width=200,
-            height=300
-        ).interactive()
-    top2=subdata.groupby(["procedure"])[["wait_time_90"]].mean().reset_index().sort_values(by=['wait_time_90'], ascending=False).head(20)["procedure"].tolist()
-    subdata_top2=subdata[subdata["procedure"].isin(top2)]
-    chart2 = alt.Chart(subdata_top2).mark_tick().encode(
-            x=alt.X('mean(wait_time_90):Q',title="Wait Time (weeks)"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
-            color=alt.Color('year')
-        ).properties(
-            title="Waiting Times for 90 percent of Cases by Procedure",
-            width=200,
-            height=300
-        ).interactive()
-    chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
-        labelFontSize=10,
-        titleFontSize=10
-    ).to_html()
-    return chart_sbs
-
-# Tab 1 side by side bar plot for hospital
-def plot_bar_sbs_hospital_t1(autho=["Fraser"]):
-    subdata=count[count.health_authority.isin(autho)]
-    top=subdata.groupby(["hospital"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["hospital"].tolist()
-    subdata_top=subdata[subdata["hospital"].isin(top)]
-    chart1 = alt.Chart(subdata_top).mark_bar().encode(
-            x=alt.X('sum(waiting):Q',title="Total Waiting Cases"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
-            color=alt.Color('year')
-        ).properties(
-            title="Number of Waiting Cases for Different Hospitals",
-            width=200,
-            height=300
-        ).interactive()
-    top2=subdata.groupby(["hospital"])[["completed"]].sum().reset_index().sort_values(by=['completed'], ascending=False).head(20)["hospital"].tolist()
-    subdata_top2=subdata[subdata["hospital"].isin(top2)]
-    chart2 = alt.Chart(subdata_top2).mark_bar().encode(
-            x=alt.X('sum(completed):Q',title="Total Completed Cases"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
-            color=alt.Color('year')
-        ).properties(
-            title="Number of Completed Cases for Different Hospitals",
-            width=200,
-            height=300
-        ).interactive()
-    chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
-        labelFontSize=10,
-        titleFontSize=10
-    ).to_html()
-    return chart_sbs
-
-# Tab 2 side by side bar plot for hospital
-def plot_bar_sbs_hospital_t2(autho=["Fraser"]):
-    subdata=main[main.health_authority.isin(autho)]
-    top=subdata.groupby(["hospital"])[["wait_time_90"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
-    subdata_top=subdata[subdata["hospital"].isin(top)]
-    chart1 = alt.Chart(subdata_top).mark_tick().encode(
-            x=alt.X('mean(wait_time_50):Q',title="Wait Time (weeks)"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
-            color=alt.Color('year')
-        ).properties(
-            title="Waiting Times for 50 percent of Cases by Hospitals",
-            width=200,
-            height=300
-        ).interactive()
-    top2=subdata.groupby(["hospital"])[["wait_time_90"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
-    subdata_top2=subdata[subdata["hospital"].isin(top2)]
-    chart2 = alt.Chart(subdata_top2).mark_tick().encode(
-            x=alt.X('mean(wait_time_90):Q',title="Wait Time (weeks)"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
-            color=alt.Color('year')
-        ).properties(
-            title="Waiting Times for 90 percent of Cases by Hospitals",
-            width=200,
-            height=300
-        ).interactive()
-    chart_sbs=alt.hconcat(chart1,chart2).configure_axis(
-        labelFontSize=10,
-        titleFontSize=10
-    ).to_html()
-    return chart_sbs
-
-# Tab1-plot1: waiting & completed cases by time
-t1p1=html.Iframe(
-    id="t1p1",
-    srcDoc=line_plot_t1(),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'}
-)
-
-# Tab2-plot1: wait times (50th and 90th percentile) by time
-t2p1=html.Iframe(
-    id="t2p1",
-    srcDoc=line_plot_t2(),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'}
-)
-
-# Tab1-plot2: waiting and completed cases by procedure
-t1p2=html.Iframe(
-    id="t1p2",
-    srcDoc=plot_bar_sbs_procedure_t1(autho=["Fraser"]),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'}
-)
-
-# Tab2-plot2: wait times (50th and 90th percentile) by procedure
-t2p2=html.Iframe(
-    id="t2p2",
-    srcDoc=plot_bar_sbs_procedure_t2(autho=["Fraser"]),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'}
-)
-
-# Tab1-plot3: waiting and completed cases by hospital
-t1p3=html.Iframe(
-    id="t1p3",
-    srcDoc=plot_bar_sbs_hospital_t1(autho=["Fraser"]),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'}
-)
-
-# Tab2-plot3: wait times (50th and 90th percentile) by hospital
-t2p3=html.Iframe(
-    id="t2p3",
-    srcDoc=plot_bar_sbs_hospital_t2(autho=["Fraser"]),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'}
-)
-
-# Tab 1 Layout Components
-tab1 = [
-    html.Div([
-        dbc.Row(dbc.Col(t1p1)),
-        dbc.Row(dbc.Col(t1p2)),
-        dbc.Row(dbc.Col(t1p3)),
-            ]),
-    ]
-
-# Tab 2 Layout Components
-tab2 = [
-    html.Div([
-        dbc.Row([
-            dbc.Col(t2p1, width=13)]),
-        dbc.Row(dbc.Col(t2p2)),
-        dbc.Row(dbc.Col(t2p3)),
-            ]),
-]
-
-# Sidebar components
-title = html.H1(
-    'BC Surgical Wait Time Dashboard',
-    style = {'color': 'var(--bs-primary)'}
-)
-
-nav = dbc.Nav(
-    children = [
-        dbc.NavLink(
-            'Waiting and Completed Cases - Tab 1',
-            style = {'border-radius': '0.4rem 0 0 0.4rem'},
-            href = '/tab1',
-            active = 'exact'
-        ),
-        dbc.NavLink(
-            'Wait Times, 50th and 90th Percentile - Tab 2',
-            style = {'border-radius': '0.4rem 0 0 0.4rem'},
-            href = '/tab2',
-            active = 'exact'
-        )
-    ],
-    pills = True,
-    vertical = True
-)
-
-region_select = dbc.InputGroup(
-    children = [
-        dbc.Label('Health Region'),
-        dcc.Dropdown(
-            options = df.health_authority.unique()[1:],
-            multi = True,
-            style = {
-                'border-radius': '0.4rem 0.4rem 0 0',
-                'width': '100%'
-            },
-            className = 'dash-bootstrap',
-            id = 'region-select'
-        ),
-        dbc.Button(
-            'Select all regions',
-            id = 'region-select-all',
-            style = {
-                'margin': 0,
-                'border': 0,
-                'border-radius': '0 0 0.4rem 0.4rem',
-                'width': '100%'
-            },
-            n_clicks = 0,
-            color = 'primary'
-        )
-    ],
-    style = {'padding-right': '1rem'}
-)
-
-year_slider = html.Div(
-    children = [
-        dbc.Label('Year Range'),
-        dcc.RangeSlider(
-            2009, 
-            2022, 
-            1,
-            value = [2020, 2021],
-            marks = None,
-            allowCross=False,
-            tooltip = {'placement': 'bottom', 'always_visible': True},
-            id='year-slider'
-        )
-    ],
-    style = {'margin-top': '1rem'}
-)
-
-quarter_radio = html.Div(
-    children = [
-        dbc.Label('Quarter'),
-        dbc.RadioItems(
-            options = [
-                {'label': q, 'value': q}
-                for q in ['Q1', 'Q2', 'Q3', 'Q4', 'All']
-            ],
-            value = 'All',
-            inline = True,
-            id = 'quarter'
-        )
-    ],
-    style = {'margin-top': '1rem'}
-)
-
-sidebar = html.Div(
-    children = [
-        title,
-        html.Hr(style = {'color': 'var(--bs-primary)'}),
-        nav,
-        html.Hr(style = {'color': 'var(--bs-primary)'}),
-        region_select,
-        # year_slider,
-        # quarter_radio
-    ],
-    style = {
-        'position': 'fixed',
-        'top': 0,
-        'left': 0,
-        'width': '25rem',
-        'height': '100%',
-        'padding': '2rem 0 2rem 1rem'
-    },
-    className = 'bg-light'
-)
 
 # Layout
 app.layout = dbc.Container(
@@ -380,12 +106,17 @@ app.layout = dbc.Container(
     Input('url', 'pathname')
 )
 def render_page_content(pathname):
-    if pathname == '/tab1':
-        return tab1
-    elif pathname == '/tab2':
-        return tab2
+    if pathname == '/count_tab_proc':
+        return CountTab.proc
+    elif pathname == '/count_tab_hosp':
+        return CountTab.hosp
+    elif pathname == '/times_tab_proc':
+        return TimesTab.proc
+    elif pathname == '/times_tab_hosp':
+        return TimesTab.hosp
     else:
-        return html.H1('Welcome!', style={'color': 'var(--bs-primary)'})
+        return SummaryTab.written
+        
 
 # Settings
 @app.callback(
@@ -398,35 +129,35 @@ def select_all_regions(_, regions):
 
 # Tabs
 @app.callback(
-    Output('t1p1','srcDoc'),
+    Output('tcp1','srcDoc'),
     Input('region-select', 'value'))
-def update_t1p1(autho):
-    return line_plot_t1(list(autho))
+def update_tcp1(autho):
+    return CountTab.line_plot_tc(list(autho))
 @app.callback(
-    Output('t2p1','srcDoc'),
+    Output('ttp1','srcDoc'),
     Input('region-select', 'value'))
-def update_t2p1(autho):
-    return line_plot_t2(list(autho))
+def update_ttp1(autho):
+    return TimesTab.line_plot_tt(list(autho))
 @app.callback(
-    Output('t1p2','srcDoc'),
+    Output('tcp2','srcDoc'),
     Input('region-select', 'value'))
-def update_t1p2(autho):
-    return plot_bar_sbs_procedure_t1(list(autho))
+def update_tcp2(autho):
+    return CountTab.plot_bar_sbs_procedure_tc(list(autho))
 @app.callback(
-    Output('t2p2','srcDoc'),
+    Output('ttp2','srcDoc'),
     Input('region-select', 'value'))
-def update_t2p2(autho):
-    return plot_bar_sbs_procedure_t2(list(autho))
+def update_ttp2(autho):
+    return TimesTab.plot_bar_sbs_procedure_tt(list(autho))
 @app.callback(
-    Output('t1p3','srcDoc'),
+    Output('tcp3','srcDoc'),
     Input('region-select', 'value'))
-def update_t1p3(autho):
-    return plot_bar_sbs_hospital_t1(list(autho))
+def update_tcp3(autho):
+    return CountTab.plot_bar_sbs_hospital_tc(list(autho))
 @app.callback(
-    Output('t2p3','srcDoc'),
+    Output('ttp3','srcDoc'),
     Input('region-select', 'value'))
-def update_t2p3(autho):
-    return plot_bar_sbs_hospital_t2(list(autho))
+def update_ttp3(autho):
+    return TimesTab.plot_bar_sbs_hospital_tt(list(autho))
 
 # @app.callback(
 #     Output('year-slider', 'children'),
