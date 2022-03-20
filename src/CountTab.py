@@ -1,24 +1,25 @@
+
 ## Plotting 
 # Waiting and completed case count line plot
-def line_plot_tc(autho=):
-    #all_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
-    #all_by_autho = just call correct df that is loaded on app.py 
+def line_plot_tc(autho="All"):
+    all_by_autho = region_df(autho,alldata=True)
     data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
         x=alt.X('Y_Q', title='Year & Quarter'),
         y=alt.Y('value',title='Number of Cases'),
+        tooltip=['value'],
         color='variable'
     ).properties(
         title="Number of Waiting & Completed Cases by Time",
         width=920,
         height=280)
-    return chart.interactive().to_html()
-
+    tt=chart.mark_line(strokeWidth=30, opacity=0.01)
+    ttchart=chart+tt
+    return ttchart.interactive().to_html()
 
 # Waiting and completed case count side by side bar plot by procedures
-def plot_bar_sbs_procedure_tc(autho=["Fraser"]):
-    #not calling count but specific csv based on autho
-    subdata=count[count.health_authority.isin(autho)]
+def plot_bar_sbs_procedure_tc(autho="All"):
+    subdata=region_df(autho)
     top=subdata.groupby(["procedure"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
@@ -48,9 +49,8 @@ def plot_bar_sbs_procedure_tc(autho=["Fraser"]):
     return chart_sbs
 
 # Waiting and completed case count side by side bar plot by hospital
-def plot_bar_sbs_hospital_tc(autho=["Fraser"]):
-    #not calling count but specific csv based on autho
-    subdata=count[count.health_authority.isin(autho)]
+def plot_bar_sbs_hospital_tc(autho="All"):
+    subdata=region_df(autho)
     top=subdata.groupby(["hospital"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
@@ -90,14 +90,14 @@ tcp1=html.Iframe(
 # CountTab-plot2: waiting and completed cases by procedure
 tcp2=html.Iframe(
     id="tcp2",
-    srcDoc=plot_bar_sbs_procedure_tc(autho=["Fraser"]),
+    srcDoc=plot_bar_sbs_procedure_tc(autho="All"),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # CountTab-plot3: waiting and completed cases by hospital
 tcp3=html.Iframe(
     id="tcp3",
-    srcDoc=plot_bar_sbs_hospital_t1(autho=["Fraser"]),
+    srcDoc=plot_bar_sbs_hospital_tc(autho="All"),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 

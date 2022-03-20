@@ -13,14 +13,12 @@ import SummaryTab.py
 import CountTab.py
 import TimesTab.py
 
-
-
 # Load data
 # Data for first plot 
 df_all = pd.read_csv('data/processed/all_data.csv')
 fraser_all = pd.read_csv('data/processed/all_fraser.csv')
 interior_all = pd.read_csv('data/processed/all_interior.csv')
-northern_all = pd.read_csv('data/processed/all_nothern.csv')
+northern_all = pd.read_csv('data/processed/all_northern.csv')
 psha_all = pd.read_csv('data/processed/all_psha.csv')
 vc_all = pd.read_csv('data/processed/all_vancouver_coastal.csv')
 vi_all = pd.read_csv('data/processed/all_vancouver_island.csv')
@@ -33,9 +31,47 @@ northern = pd.read_csv('data/processed/northern.csv')
 psha = pd.read_csv('data/processed/psha.csv')
 vc = pd.read_csv('data/processed/vancouver_coastal.csv')
 vi = pd.read_csv('data/processed/vancouver_island.csv')
-
-
-
+# add the Y_Q column and fix the year problem
+def add_Y_Q(df):
+    df['Y_Q']= df['year'].astype('str').str[2:4].map(str) + '_' + df['quarter'].map(str)
+    df['year']= df['year'].astype('str').str[0:4].map(str)
+dflist=[df_all,fraser_all,interior_all,northern_all,psha_all,vc_all,vi_all,df_main,fraser,interior,northern,psha,vc,vi]
+for item in dflist:
+    add_Y_Q(item)
+# dataframe selection function: 
+def region_df(region="All",alldata=False):
+    if alldata==True: #alldata: data for first plot
+        if region=="All":
+            return df_all
+        elif region=="Fraser":
+            return fraser_all
+        elif region=="Interior":
+            return interior_all
+        elif region=="Northern":
+            return northern_all
+        elif region=="Provincial Health Services Authority":
+            return psha_all
+        elif region=="Vancouver Coastal":
+            return vc_all
+        elif region=="Vancouver Island":
+            return vi_all
+    elif alldata==False:
+        if region=="All":
+            return df_main
+        elif region=="Fraser":
+            return fraser
+        elif region=="Interior":
+            return interior
+        elif region=="Northern":
+            return northern
+        elif region=="Provincial Health Services Authority":
+            return psha
+        elif region=="Vancouver Coastal":
+            return vc
+        elif region=="Vancouver Island":
+            return vi
+    else:
+        return None
 
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
