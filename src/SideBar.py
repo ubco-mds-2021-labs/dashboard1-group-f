@@ -1,38 +1,44 @@
-# Sidebar components
+from dash import html, dcc
+
+import dash_bootstrap_components as dbc
+
 title = html.H1(
-    'BC Surgical Wait Time Dashboard',
-    style = {'color': 'var(--bs-primary)'}
+    'BC Surgical Wait Times',
+    style = {
+        'color': 'var(--bs-primary)',
+        'padding-left': '1rem'
+    }
 )
 
 nav = dbc.Nav(
     children = [
          dbc.NavLink(
              'Summary',
-             style = {'border-radius': '0.4rem 0 0 0.4rem'},
+             style = {'border-radius': '0 0.4rem 0.4rem 0'},
              href = '/summary_tab',
              active = 'exact'
          ),
         dbc.NavLink(
             'Waiting and Completed Cases by Procedure',
-            style = {'border-radius': '0.4rem 0 0 0.4rem'},
+            style = {'border-radius': '0 0.4rem 0.4rem 0'},
             href = '/count_tab_proc',
             active = 'exact'
         ),
         dbc.NavLink(
             'Waiting and Completed Cases by Hospital',
-            style = {'border-radius': '0.4rem 0 0 0.4rem'},
+            style = {'border-radius': '0 0.4rem 0.4rem 0'},
             href = '/count_tab_hosp',
             active = 'exact'
         ),
          dbc.NavLink(
             'Wait Times by Procedure',
-            style = {'border-radius': '0.4rem 0 0 0.4rem'},
+            style = {'border-radius': '0 0.4rem 0.4rem 0'},
             href = '/times_tab_proc',
             active = 'exact'
         ),
         dbc.NavLink(
-            'Wait Times, by Hospital',
-            style = {'border-radius': '0.4rem 0 0 0.4rem'},
+            'Wait Times by Hospital',
+            style = {'border-radius': '0 0.4rem 0.4rem 0'},
             href = '/times_tab_hosp',
             active = 'exact'
         )
@@ -45,29 +51,13 @@ region_select = dbc.InputGroup(
     children = [
         dbc.Label('Health Region'),
         dcc.Dropdown(
-            options = df.health_authority.unique()[1:],
-            multi = True,
-            style = {
-                'border-radius': '0.4rem 0.4rem 0 0',
-                'width': '100%'
-            },
+            options = None,
+            style = {'width': '100%'},
             className = 'dash-bootstrap',
             id = 'region-select'
-        ),
-        dbc.Button(
-            'Select all regions',
-            id = 'region-select-all',
-            style = {
-                'margin': 0,
-                'border': 0,
-                'border-radius': '0 0 0.4rem 0.4rem',
-                'width': '100%'
-            },
-            n_clicks = 0,
-            color = 'primary'
         )
     ],
-    style = {'padding-right': '1rem'}
+    style = {'padding-left': '1rem'}
 )
 
 year_slider = html.Div(
@@ -117,9 +107,9 @@ sidebar = html.Div(
         'position': 'fixed',
         'top': 0,
         'left': 0,
-        'width': '25rem',
+        'width': '23rem',
         'height': '100%',
-        'padding': '2rem 0 2rem 1rem'
+        'padding': '2rem 1rem 2rem 0'
     },
     className = 'bg-light'
 )
