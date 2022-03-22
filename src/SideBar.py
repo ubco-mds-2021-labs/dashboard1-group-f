@@ -52,6 +52,7 @@ region_select = dbc.InputGroup(
         dbc.Label('Health Region'),
         dcc.Dropdown(
             options = None,
+            clearable = False,
             style = {'width': '100%'},
             className = 'dash-bootstrap',
             id = 'region-select'
