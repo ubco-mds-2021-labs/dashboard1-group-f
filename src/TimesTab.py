@@ -1,12 +1,13 @@
 
 # Wait times line plot
-def line_plot_tt(autho=default csv variable):
-    #done in csvall_by_autho = df[(df['procedure']=='All Procedures') & (df['hospital']=='All Facilities') & (df.health_authority.isin(autho))]
-    all_by_autho = specific csv variable based on select
+def line_plot_tt(autho=["All"]):
+    autho = autho[0]
+    all_by_autho = region_df(autho, alldata=True)
     data=all_by_autho.groupby(['Y_Q'])[["wait_time_50","wait_time_90"]].mean().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
         x=alt.X('Y_Q', title='Year & Quarter'),
         y=alt.Y('value',title='Wait Time (weeks'),
+        tooltip=['value'],
         color='variable'
     ).properties(
         title="50th and 90th Percentile Waiting Times",
@@ -16,9 +17,9 @@ def line_plot_tt(autho=default csv variable):
 
 
 # Wait times side by side bar plot for procedures
-def plot_bar_sbs_procedure_tt(autho=["Fraser"]):
-    #not calling main but specific csv variable based on autho
-    subdata=main[main.health_authority.isin(autho)]
+def plot_bar_sbs_procedure_tt(autho=["All"]):
+    autho = autho[0]
+    subdata = region_df(autho)
     top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_tick().encode(
@@ -48,10 +49,10 @@ def plot_bar_sbs_procedure_tt(autho=["Fraser"]):
     return chart_sbs
 
 # Wait times side by side bar plot for hospital
-def plot_bar_sbs_hospital_tt(autho=["Fraser"]):
-    #not calling main but specific csv variable based on autho
-    subdata=main[main.health_authority.isin(autho)]
-    top=subdata.groupby(["hospital"])[["wait_time_90"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
+def plot_bar_sbs_hospital_tt(autho=["All"]):
+    autho = autho[0]
+    subdata = region_df(autho)
+    top=subdata.groupby(["hospital"])[["wait_time_50"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_tick().encode(
             x=alt.X('mean(wait_time_50):Q',title="Wait Time (weeks)"),
@@ -89,14 +90,14 @@ ttp1=html.Iframe(
 # TimesTab-plot2: wait times (50th and 90th percentile) by procedure
 ttp2=html.Iframe(
     id="ttp2",
-    srcDoc=plot_bar_sbs_procedure_tt(autho=["Fraser"]),
+    srcDoc=plot_bar_sbs_procedure_tt(autho=["All"]),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # TimesTab-plot3: wait times (50th and 90th percentile) by hospital
 ttp3=html.Iframe(
     id="ttp3",
-    srcDoc=plot_bar_sbs_hospital_tt(autho=["Fraser"]),
+    srcDoc=plot_bar_sbs_hospital_tt(autho=["All"]),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
