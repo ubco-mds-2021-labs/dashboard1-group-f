@@ -10,7 +10,7 @@ import numpy as np
 
 from SideBar import sidebar
 # import SummaryTab
-# import CountTab
+import CountTab
 # import TimesTab
 
 # Load data
@@ -75,7 +75,7 @@ def region_df(region="All",alldata=False):
 
 # Declare dash app
 app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
-# app.config.suppress_callback_exceptions = True
+app.config.suppress_callback_exceptions = True
 server = app.server
 
 # Configure Altair - uncomment to run locally, comment out for Heroku deployment
@@ -111,11 +111,11 @@ sidebar.children[4].children[1].value = 'All'
 )
 def render_page_content(pathname):
     if pathname == '/count_tab_proc':
-        # return CountTab.proc
-        return 'Count Tab - Process'
+        return CountTab.proc
+        #return 'Count Tab - Process'
     elif pathname == '/count_tab_hosp':
-        # return CountTab.hosp
-        return 'Count Tab - Hospital'
+        return CountTab.hosp
+        #return 'Count Tab - Hospital'
     elif pathname == '/times_tab_proc':
         # return TimesTab.proc
         return 'Times Tab - Process'
@@ -127,31 +127,31 @@ def render_page_content(pathname):
         return 'Summary Tab'
 
 # Tabs
-# @app.callback(
-#     Output('tcp1','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_tcp1(autho):
-#     return CountTab.line_plot_tc(df_all, list(autho))
+@app.callback(
+    Output('tcp1','srcDoc'),
+    Input('region-select', 'value'))
+def update_tcp1(autho):
+    return CountTab.line_plot_tc(autho)
 # @app.callback(
 #     Output('ttp1','srcDoc'),
 #     Input('region-select', 'value'))
 # def update_ttp1(autho):
 #     return TimesTab.line_plot_tt(df_all, list(autho))
-# @app.callback(
-#     Output('tcp2','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_tcp2(autho):
-#     return CountTab.plot_bar_sbs_procedure_tc(df_all, list(autho))
+@app.callback(
+    Output('tcp2','srcDoc'),
+    Input('region-select', 'value'))
+def update_tcp2(autho):
+    return CountTab.plot_bar_sbs_procedure_tc(autho)
 # @app.callback(
 #     Output('ttp2','srcDoc'),
 #     Input('region-select', 'value'))
 # def update_ttp2(autho):
 #     return TimesTab.plot_bar_sbs_procedure_tt(df_all, list(autho))
-# @app.callback(
-#     Output('tcp3','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_tcp3(autho):
-#     return CountTab.plot_bar_sbs_hospital_tc(df_all, list(autho))
+@app.callback(
+    Output('tcp3','srcDoc'),
+    Input('region-select', 'value'))
+def update_tcp3(autho):
+    return CountTab.plot_bar_sbs_hospital_tc(autho)
 # @app.callback(
 #     Output('ttp3','srcDoc'),
 #     Input('region-select', 'value'))
