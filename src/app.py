@@ -101,7 +101,11 @@ def region_df(region="All",alldata=False):
         return None
 
 # Declare dash app
-app = Dash(__name__, external_stylesheets = [dbc.themes.MINTY])
+app = Dash(
+    __name__,
+    external_stylesheets = [dbc.themes.MINTY],
+    title = 'BC Surgical Wait Times'
+)
 app.config.suppress_callback_exceptions = True
 server = app.server
 
@@ -192,4 +196,4 @@ def update_ttp3(autho):
 #     return 'Year(s) selected{}'.format(value)
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server()
