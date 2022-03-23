@@ -136,7 +136,7 @@ def update_tcp1(autho):
     Output('ttp1','srcDoc'),
     Input('region-select', 'value'))
 def update_ttp1(autho):
-    return TimesTab.line_plot_tt(autho)
+    return TimesTab.line_plot_tt(region_df(autho, True))
 @app.callback(
     Output('tcp2','srcDoc'),
     Input('region-select', 'value'))
@@ -146,7 +146,7 @@ def update_tcp2(autho):
     Output('ttp2','srcDoc'),
     Input('region-select', 'value'))
 def update_ttp2(autho):
-    return TimesTab.plot_bar_sbs_procedure_tt(autho)
+    return TimesTab.plot_bar_sbs_procedure_tt(region_df(autho))
 @app.callback(
     Output('tcp3','srcDoc'),
     Input('region-select', 'value'))
@@ -156,7 +156,7 @@ def update_tcp3(autho):
     Output('ttp3','srcDoc'),
     Input('region-select', 'value'))
 def update_ttp3(autho):
-    return TimesTab.plot_bar_sbs_hospital_tt(autho)
+    return TimesTab.plot_bar_sbs_hospital_tt(region_df(autho))
 
 # @app.callback(
 #     Output('year-slider', 'children'),
