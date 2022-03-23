@@ -89,30 +89,24 @@ def plot_bar_sbs_hospital_tt(df):
     ).to_html()
     return chart_sbs
 
-
-alt.data_transformers.disable_max_rows()
-df_all = pd.read_csv('data/processed/all_data.csv')
-df_main = pd.read_csv('data/processed/main_data.csv')
-
-
 # TimesTab-plot1: wait times (50th and 90th percentile) by time
 ttp1=html.Iframe(
     id="ttp1",
-    srcDoc=line_plot_tt(df_all),
+    srcDoc=None,
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # TimesTab-plot2: wait times (50th and 90th percentile) by procedure
 ttp2=html.Iframe(
     id="ttp2",
-    srcDoc=plot_bar_sbs_procedure_tt(df_main),
+    srcDoc=None,
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # TimesTab-plot3: wait times (50th and 90th percentile) by hospital
 ttp3=html.Iframe(
     id="ttp3",
-    srcDoc=plot_bar_sbs_hospital_tt(df_main),
+    srcDoc=None,
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
