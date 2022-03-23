@@ -11,7 +11,7 @@ import numpy as np
 from SideBar import sidebar
 # import SummaryTab
 import CountTab
-# import TimesTab
+import TimesTab
 
 # Load data
 # Data for first plot 
@@ -117,11 +117,11 @@ def render_page_content(pathname):
         return CountTab.hosp
         #return 'Count Tab - Hospital'
     elif pathname == '/times_tab_proc':
-        # return TimesTab.proc
-        return 'Times Tab - Process'
+        return TimesTab.proc
+        #return 'Times Tab - Process'
     elif pathname == '/times_tab_hosp':
-        # return TimesTab.hosp
-        return 'Times Tab - Hospital'
+        return TimesTab.hosp
+        #return 'Times Tab - Hospital'
     else:
         # return SummaryTab.written
         return 'Summary Tab'
@@ -132,31 +132,31 @@ def render_page_content(pathname):
     Input('region-select', 'value'))
 def update_tcp1(autho):
     return CountTab.line_plot_tc(autho)
-# @app.callback(
-#     Output('ttp1','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_ttp1(autho):
-#     return TimesTab.line_plot_tt(df_all, list(autho))
+@app.callback(
+    Output('ttp1','srcDoc'),
+    Input('region-select', 'value'))
+def update_ttp1(autho):
+    return TimesTab.line_plot_tt(region_df(autho, True))
 @app.callback(
     Output('tcp2','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp2(autho):
     return CountTab.plot_bar_sbs_procedure_tc(autho)
-# @app.callback(
-#     Output('ttp2','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_ttp2(autho):
-#     return TimesTab.plot_bar_sbs_procedure_tt(df_all, list(autho))
+@app.callback(
+    Output('ttp2','srcDoc'),
+    Input('region-select', 'value'))
+def update_ttp2(autho):
+    return TimesTab.plot_bar_sbs_procedure_tt(region_df(autho))
 @app.callback(
     Output('tcp3','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp3(autho):
     return CountTab.plot_bar_sbs_hospital_tc(autho)
-# @app.callback(
-#     Output('ttp3','srcDoc'),
-#     Input('region-select', 'value'))
-# def update_ttp3(autho):
-#     return TimesTab.plot_bar_sbs_hospital_tt(df_all, list(autho))
+@app.callback(
+    Output('ttp3','srcDoc'),
+    Input('region-select', 'value'))
+def update_ttp3(autho):
+    return TimesTab.plot_bar_sbs_hospital_tt(region_df(autho))
 
 # @app.callback(
 #     Output('year-slider', 'children'),

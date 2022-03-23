@@ -1,8 +1,17 @@
+from dash import Dash, dcc, html
+#from pydoc import classname
+#from dash.dependencies import Input, Output, State
+#from pathlib import Path
+
+import dash_bootstrap_components as dbc
+import altair as alt
+import pandas as pd
+import numpy as np
 
 # Wait times line plot
-def line_plot_tt(autho=["All"]):
-    autho = autho[0]
-    all_by_autho = region_df(autho, alldata=True)
+def line_plot_tt(df):
+    #autho = autho[0]
+    all_by_autho = df
     data=all_by_autho.groupby(['Y_Q'])[["wait_time_50","wait_time_90"]].mean().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
         x=alt.X('Y_Q', title='Year & Quarter'),
@@ -17,9 +26,9 @@ def line_plot_tt(autho=["All"]):
 
 
 # Wait times side by side bar plot for procedures
-def plot_bar_sbs_procedure_tt(autho=["All"]):
-    autho = autho[0]
-    subdata = region_df(autho)
+def plot_bar_sbs_procedure_tt(df):
+    #autho = autho[0]
+    subdata = df
     top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_tick().encode(
@@ -49,9 +58,9 @@ def plot_bar_sbs_procedure_tt(autho=["All"]):
     return chart_sbs
 
 # Wait times side by side bar plot for hospital
-def plot_bar_sbs_hospital_tt(autho=["All"]):
-    autho = autho[0]
-    subdata = region_df(autho)
+def plot_bar_sbs_hospital_tt(df):
+    #autho = autho[0]
+    subdata = df
     top=subdata.groupby(["hospital"])[["wait_time_50"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_tick().encode(
@@ -83,21 +92,21 @@ def plot_bar_sbs_hospital_tt(autho=["All"]):
 # TimesTab-plot1: wait times (50th and 90th percentile) by time
 ttp1=html.Iframe(
     id="ttp1",
-    srcDoc=line_plot_tt(),
+    srcDoc=None,
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # TimesTab-plot2: wait times (50th and 90th percentile) by procedure
 ttp2=html.Iframe(
     id="ttp2",
-    srcDoc=plot_bar_sbs_procedure_tt(autho=["All"]),
+    srcDoc=None,
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # TimesTab-plot3: wait times (50th and 90th percentile) by hospital
 ttp3=html.Iframe(
     id="ttp3",
-    srcDoc=plot_bar_sbs_hospital_tt(autho=["All"]),
+    srcDoc=None,
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
