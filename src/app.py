@@ -38,8 +38,35 @@ def add_Y_Q(df):
 dflist=[df_all,fraser_all,interior_all,northern_all,psha_all,vc_all,vi_all,df_main,fraser,interior,northern,psha,vc,vi]
 for item in dflist:
     add_Y_Q(item)
+
 # dataframe selection function: 
 def region_df(region="All",alldata=False):
+    """
+    Get the corresponding dataframe though a passed region value.
+    
+    Take the output region from the dropdown selection and return the corresponding dataframe. 
+    If the dataframe is going to be used in the line plot which show the total from a certain region, 
+    then alldata should be True; otherwise alldata is default to be False to detailed data to be used
+    in the bar plots.
+    
+    Parameters
+    ----------
+    region : str
+        The string of the region name.
+
+    alldata: Boolean
+        If the data is the total data from certain region.
+
+    Returns
+    -------
+    dataframe
+        The returned dataframe. 
+        
+    Examples
+    --------
+    >>> region_df(region="Fraser",alldata=False)
+    fraser
+    """
     if alldata==True: #alldata: data for first plot
         if region=="All":
             return df_all
