@@ -12,6 +12,24 @@ from app import region_df as region_df
 ## Plotting 
 # Waiting and completed case count line plot
 def line_plot_tc(autho="All"):
+    """
+    Plot a line plot to show the count of the waiting and completed cases for a certain region by time.
+    
+    Parameters
+    ----------
+    autho : str
+        The string of the region name.
+
+    Returns
+    -------
+    html
+        The returned plot which converted to html. 
+        
+    Examples
+    --------
+    >>> line_plot_tc(autho="Fraser")
+    ttchart.interactive().to_html()
+    """
     all_by_autho = region_df(autho,alldata=True)
     data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
@@ -29,6 +47,25 @@ def line_plot_tc(autho="All"):
 
 # Waiting and completed case count side by side bar plot by procedures
 def plot_bar_sbs_procedure_tc(autho="All"):
+    """
+    Plot a two bar plots to show the count of the waiting and completed cases by procedures for a certain region in each year.
+    One for the waiting cases, and the other is for the completed cases. 
+
+    Parameters
+    ----------
+    autho : str
+        The string of the region name.
+
+    Returns
+    -------
+    html
+        The returned bar plots that are converted to html. 
+        
+    Examples
+    --------
+    >>> plot_bar_sbs_procedure_tc(autho="Fraser")
+    chart_sbs
+    """
     subdata=region_df(autho)
     top=subdata.groupby(["procedure"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
@@ -60,6 +97,25 @@ def plot_bar_sbs_procedure_tc(autho="All"):
 
 # Waiting and completed case count side by side bar plot by hospital
 def plot_bar_sbs_hospital_tc(autho="All"):
+    """
+    Plot a two bar plots to show the count of the waiting and completed cases by hospital for a certain region in each year.
+    One for the waiting cases, and the other is for the completed cases. 
+
+    Parameters
+    ----------
+    autho : str
+        The string of the region name.
+
+    Returns
+    -------
+    html
+        The returned bar plots that are converted to html. 
+        
+    Examples
+    --------
+    >>> plot_bar_sbs_hospital_tc(autho="Fraser")
+    chart_sbs
+    """
     subdata=region_df(autho)
     top=subdata.groupby(["hospital"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
