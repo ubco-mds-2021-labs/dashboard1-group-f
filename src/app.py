@@ -8,10 +8,10 @@ import altair as alt
 import pandas as pd
 import numpy as np
 
-from SideBar import sidebar
-import SummaryTab
-import CountTab
-import TimesTab
+from src.SideBar import sidebar
+import src.SummaryTab as SummaryTab
+import src.CountTab as CountTab
+import src.TimesTab as TimesTab
 
 # Load data
 # Data for first plot 
@@ -106,13 +106,13 @@ app = Dash(
     external_stylesheets = [dbc.themes.MINTY],
     title = 'BC Surgical Wait Times'
 )
-app.config.suppress_callback_exceptions = True
+# app.config.suppress_callback_exceptions = True
 server = app.server
 
 # Configure Altair - uncomment to run locally, comment out for Heroku deployment
-alt.renderers.enable('mimetype')
-alt.data_transformers.enable('data_server')
-alt.data_transformers.disable_max_rows()
+# alt.renderers.enable('mimetype')
+# alt.data_transformers.enable('data_server')
+# alt.data_transformers.disable_max_rows()
 
 # Layout
 app.layout = dbc.Container(
@@ -154,7 +154,6 @@ def render_page_content(pathname):
         return TimesTab.hosp
         #return 'Times Tab - Hospital'
     else:
-        # return SummaryTab.intro
         return SummaryTab.intro
 
 # Tabs
@@ -188,12 +187,6 @@ def update_tcp3(autho):
     Input('region-select', 'value'))
 def update_ttp3(autho):
     return TimesTab.plot_bar_sbs_hospital_tt(region_df(autho))
-
-# @app.callback(
-#     Output('year-slider', 'children'),
-#     Input('year-slider', 'value'))
-# def update_output(input_value):
-#     return 'Year(s) selected{}'.format(value)
 
 if __name__ == '__main__':
     app.run_server()
