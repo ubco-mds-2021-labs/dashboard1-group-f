@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 
 from SideBar import sidebar
-# import SummaryTab
+import SummaryTab
 import CountTab
 import TimesTab
 
@@ -31,9 +31,9 @@ northern = pd.read_csv('data/processed/northern.csv')
 psha = pd.read_csv('data/processed/psha.csv')
 vc = pd.read_csv('data/processed/vancouver_coastal.csv')
 vi = pd.read_csv('data/processed/vancouver_island.csv')
-# add the Y_Q column and fix the year problem
+
+# fix the year problem
 def add_Y_Q(df):
-    df['Y_Q']= df['year'].astype('str').str[2:4].map(str) + '_' + df['quarter'].map(str)
     df['year']= df['year'].astype('str').str[0:4].map(str)
 dflist=[df_all,fraser_all,interior_all,northern_all,psha_all,vc_all,vi_all,df_main,fraser,interior,northern,psha,vc,vi]
 for item in dflist:
@@ -150,8 +150,8 @@ def render_page_content(pathname):
         return TimesTab.hosp
         #return 'Times Tab - Hospital'
     else:
-        # return SummaryTab.written
-        return 'Summary Tab'
+        # return SummaryTab.intro
+        return SummaryTab.intro
 
 # Tabs
 @app.callback(

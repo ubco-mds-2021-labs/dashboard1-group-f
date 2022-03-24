@@ -33,7 +33,7 @@ def plot_bar_sbs_procedure_tt(df):
     subdata_top=subdata[subdata["procedure"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_tick().encode(
             x=alt.X('mean(wait_time_50):Q',title="Wait Time (weeks)"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            y=alt.Y("procedure", sort='-x',title=""),
             color=alt.Color('year')
         ).properties(
             title="Waiting Times for 50 percent of Cases by Procedure",
@@ -44,7 +44,7 @@ def plot_bar_sbs_procedure_tt(df):
     subdata_top2=subdata[subdata["procedure"].isin(top2)]
     chart2 = alt.Chart(subdata_top2).mark_tick().encode(
             x=alt.X('mean(wait_time_90):Q',title="Wait Time (weeks)"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            y=alt.Y("procedure", sort='-x',title=""),
             color=alt.Color('year')
         ).properties(
             title="Waiting Times for 90 percent of Cases by Procedure",
@@ -65,7 +65,7 @@ def plot_bar_sbs_hospital_tt(df):
     subdata_top=subdata[subdata["hospital"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_tick().encode(
             x=alt.X('mean(wait_time_50):Q',title="Wait Time (weeks)"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
+            y=alt.Y("hospital", sort='-x',title=""),
             color=alt.Color('year')
         ).properties(
             title="Waiting Times for 50 percent of Cases by Hospitals",
@@ -76,7 +76,7 @@ def plot_bar_sbs_hospital_tt(df):
     subdata_top2=subdata[subdata["hospital"].isin(top2)]
     chart2 = alt.Chart(subdata_top2).mark_tick().encode(
             x=alt.X('mean(wait_time_90):Q',title="Wait Time (weeks)"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
+            y=alt.Y("hospital", sort='-x',title=""),
             color=alt.Color('year')
         ).properties(
             title="Waiting Times for 90 percent of Cases by Hospitals",
@@ -113,6 +113,8 @@ ttp3=html.Iframe(
 # Wait Times Layout Components
 proc = [
     html.Div([
+        html.H5('Research Question: In the Northern Health Authority, do hip and knee replacements meet the 26 week benchmark?'),
+        html.H6('Answer: Prior to 2021, yes, but so far in 2021, 50 percent of cases are done within this time period, but 90 percent are not.'),
         dbc.Row([
             dbc.Col(ttp1, width=13)]),
             dbc.Row(dbc.Col(ttp2)),
@@ -121,6 +123,8 @@ proc = [
 
 hosp = [
     html.Div([
+        html.H5('Research Question: In 2020, during the Covid Pandemic, which hospital in the Vancouver Coastal Health Authority suffered the greatest change in surgical wait times?'),
+        html.H6('Answer: Squamish General Hospital, followed by UBC HSC.'),
         dbc.Row([
             dbc.Col(ttp1, width=13)]),
             dbc.Row(dbc.Col(ttp3)),
