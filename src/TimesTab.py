@@ -1,7 +1,4 @@
-from dash import Dash, dcc, html
-#from pydoc import classname
-#from dash.dependencies import Input, Output, State
-#from pathlib import Path
+from dash import html
 
 import dash_bootstrap_components as dbc
 import altair as alt
@@ -10,7 +7,6 @@ import numpy as np
 
 # Wait times line plot
 def line_plot_tt(df):
-    #autho = autho[0]
     all_by_autho = df
     data=all_by_autho.groupby(['Y_Q'])[["wait_time_50","wait_time_90"]].mean().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
@@ -27,7 +23,6 @@ def line_plot_tt(df):
 
 # Wait times side by side bar plot for procedures
 def plot_bar_sbs_procedure_tt(df):
-    #autho = autho[0]
     subdata = df
     top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
@@ -59,7 +54,6 @@ def plot_bar_sbs_procedure_tt(df):
 
 # Wait times side by side bar plot for hospital
 def plot_bar_sbs_hospital_tt(df):
-    #autho = autho[0]
     subdata = df
     top=subdata.groupby(["hospital"])[["wait_time_50"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]

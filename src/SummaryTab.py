@@ -1,10 +1,4 @@
-from dash import Dash, dcc, html
-from pydoc import classname
-from dash import Dash, dcc, html
-from dash.dependencies import Input, Output, State
-from pathlib import Path
-
-import dash_bootstrap_components as dbc
+from dash import dcc, html
 
 # Summary page markdown content
 

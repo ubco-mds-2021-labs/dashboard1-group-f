@@ -1,14 +1,10 @@
-from dash import Dash, dcc, html
-from pydoc import classname
-from dash import Dash, dcc, html
-from dash.dependencies import Input, Output, State
-from pathlib import Path
+from dash import html
 
 import dash_bootstrap_components as dbc
 import altair as alt
 import pandas as pd
 import numpy as np
-# from app import region_df as region_df
+
 ## Plotting 
 # Waiting and completed case count line plot
 def line_plot_tc(all_by_autho):
@@ -17,8 +13,8 @@ def line_plot_tc(all_by_autho):
     
     Parameters
     ----------
-    autho : str
-        The string of the region name.
+    all_by_autho : pandas.DataFrame
+        The data to be plotted.
 
     Returns
     -------
@@ -27,10 +23,9 @@ def line_plot_tc(all_by_autho):
         
     Examples
     --------
-    >>> line_plot_tc(autho="Fraser")
+    >>> line_plot_tc(app.region_df(autho="Fraser"))
     ttchart.interactive().to_html()
     """
-    # all_by_autho = region_df(autho,alldata=True)
     data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
         x=alt.X('Y_Q', title='Year & Quarter'),
@@ -53,8 +48,8 @@ def plot_bar_sbs_procedure_tc(subdata):
 
     Parameters
     ----------
-    autho : str
-        The string of the region name.
+    subdata : pandas.DataFrame
+        The data to be plotted.
 
     Returns
     -------
@@ -63,10 +58,9 @@ def plot_bar_sbs_procedure_tc(subdata):
         
     Examples
     --------
-    >>> plot_bar_sbs_procedure_tc(autho="Fraser")
+    >>> plot_bar_sbs_procedure_tc(app.region_df(autho="Fraser"))
     chart_sbs
     """
-    # subdata=region_df(autho)
     top=subdata.groupby(["procedure"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
@@ -103,8 +97,8 @@ def plot_bar_sbs_hospital_tc(subdata):
 
     Parameters
     ----------
-    autho : str
-        The string of the region name.
+    subdata : pandas.DataFrame
+        The data to be plotted.
 
     Returns
     -------
@@ -113,10 +107,9 @@ def plot_bar_sbs_hospital_tc(subdata):
         
     Examples
     --------
-    >>> plot_bar_sbs_hospital_tc(autho="Fraser")
+    >>> plot_bar_sbs_hospital_tc(app.region_df(autho="Fraser"))
     chart_sbs
     """
-    # subdata=region_df(autho)
     top=subdata.groupby(["hospital"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
@@ -149,21 +142,18 @@ def plot_bar_sbs_hospital_tc(subdata):
 # CountTab-plot1: waiting & completed cases by time
 tcp1=html.Iframe(
     id="tcp1",
-    # srcDoc=line_plot_tc(),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # CountTab-plot2: waiting and completed cases by procedure
 tcp2=html.Iframe(
     id="tcp2",
-    # srcDoc=plot_bar_sbs_procedure_tc(autho="All"),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # CountTab-plot3: waiting and completed cases by hospital
 tcp3=html.Iframe(
     id="tcp3",
-    # srcDoc=plot_bar_sbs_hospital_tc(autho="All"),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 

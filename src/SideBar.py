@@ -61,48 +61,13 @@ region_select = dbc.InputGroup(
     style = {'padding-left': '1rem'}
 )
 
-year_slider = html.Div(
-    children = [
-        dbc.Label('Year Range'),
-        dcc.RangeSlider(
-            2009, 
-            2022, 
-            1,
-            value = [2020, 2021],
-            marks = None,
-            allowCross=False,
-            tooltip = {'placement': 'bottom', 'always_visible': True},
-            id='year-slider'
-        )
-    ],
-    style = {'margin-top': '1rem'}
-)
-
-quarter_radio = html.Div(
-    children = [
-        dbc.Label('Quarter'),
-        dbc.RadioItems(
-            options = [
-                {'label': q, 'value': q}
-                for q in ['Q1', 'Q2', 'Q3', 'Q4', 'All']
-            ],
-            value = 'All',
-            inline = True,
-            id = 'quarter'
-        )
-    ],
-    style = {'margin-top': '1rem'}
-)
-
 sidebar = html.Div(
     children = [
         title,
         html.Hr(style = {'color': 'var(--bs-primary)'}),
         nav,
         html.Hr(style = {'color': 'var(--bs-primary)'}),
-        region_select,
-        # year_slider,
-        # quarter_radio
+        region_select
     ],
     style = {
         'position': 'fixed',

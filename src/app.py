@@ -1,10 +1,7 @@
-from pydoc import classname
 from dash import Dash, dcc, html
-from dash.dependencies import Input, Output, State
-from pathlib import Path
+from dash.dependencies import Input, Output
 
 import dash_bootstrap_components as dbc
-import altair as alt
 import pandas as pd
 import numpy as np
 
@@ -143,16 +140,12 @@ sidebar.children[4].children[1].value = 'All'
 def render_page_content(pathname):
     if pathname == '/count_tab_proc':
         return CountTab.proc
-        #return 'Count Tab - Process'
     elif pathname == '/count_tab_hosp':
         return CountTab.hosp
-        #return 'Count Tab - Hospital'
     elif pathname == '/times_tab_proc':
         return TimesTab.proc
-        #return 'Times Tab - Process'
     elif pathname == '/times_tab_hosp':
         return TimesTab.hosp
-        #return 'Times Tab - Hospital'
     else:
         return SummaryTab.intro
 
