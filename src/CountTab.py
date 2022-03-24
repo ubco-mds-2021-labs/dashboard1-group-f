@@ -8,7 +8,7 @@ import dash_bootstrap_components as dbc
 import altair as alt
 import pandas as pd
 import numpy as np
-from app import region_df as region_df
+# from app import region_df as region_df
 ## Plotting 
 # Waiting and completed case count line plot
 def line_plot_tc(all_by_autho):
