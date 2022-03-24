@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 
 from SideBar import sidebar
-# import SummaryTab
+import SummaryTab
 import CountTab
 import TimesTab
 
@@ -124,8 +124,8 @@ def render_page_content(pathname):
         return TimesTab.hosp
         #return 'Times Tab - Hospital'
     else:
-        # return SummaryTab.written
-        return 'Summary Tab'
+        # return SummaryTab.intro
+        return SummaryTab.intro
 
 # Tabs
 @app.callback(

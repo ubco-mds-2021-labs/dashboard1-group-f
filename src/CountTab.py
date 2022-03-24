@@ -124,7 +124,7 @@ proc = [
 hosp = [
     html.Div([
         html.H5('Research Question: In Fraser Health Authority, which 3 hospitals consistantly complete the most number of surgeries?'),
-        html.H6('Answer: Surrey Memorial, Brunaby, and Chilliwack General Hospitals'),
+        html.H6('Answer: Surrey Memorial, Burnaby, and Chilliwack General Hospitals'),
         dbc.Row(dbc.Col(tcp1)),
         dbc.Row(dbc.Col(tcp3)),
             ]),
