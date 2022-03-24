@@ -11,7 +11,7 @@ import numpy as np
 from app import region_df as region_df
 ## Plotting 
 # Waiting and completed case count line plot
-def line_plot_tc(autho="All"):
+def line_plot_tc(all_by_autho):
     """
     Plot a line plot to show the count of the waiting and completed cases for a certain region by time.
     
@@ -30,7 +30,7 @@ def line_plot_tc(autho="All"):
     >>> line_plot_tc(autho="Fraser")
     ttchart.interactive().to_html()
     """
-    all_by_autho = region_df(autho,alldata=True)
+    # all_by_autho = region_df(autho,alldata=True)
     data=all_by_autho.groupby(['Y_Q'])[["waiting","completed"]].sum().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
         x=alt.X('Y_Q', title='Year & Quarter'),
@@ -46,7 +46,7 @@ def line_plot_tc(autho="All"):
     return ttchart.interactive().to_html()
 
 # Waiting and completed case count side by side bar plot by procedures
-def plot_bar_sbs_procedure_tc(autho="All"):
+def plot_bar_sbs_procedure_tc(subdata):
     """
     Plot a two bar plots to show the count of the waiting and completed cases by procedures for a certain region in each year.
     One for the waiting cases, and the other is for the completed cases. 
@@ -66,7 +66,7 @@ def plot_bar_sbs_procedure_tc(autho="All"):
     >>> plot_bar_sbs_procedure_tc(autho="Fraser")
     chart_sbs
     """
-    subdata=region_df(autho)
+    # subdata=region_df(autho)
     top=subdata.groupby(["procedure"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
@@ -96,7 +96,7 @@ def plot_bar_sbs_procedure_tc(autho="All"):
     return chart_sbs
 
 # Waiting and completed case count side by side bar plot by hospital
-def plot_bar_sbs_hospital_tc(autho="All"):
+def plot_bar_sbs_hospital_tc(subdata):
     """
     Plot a two bar plots to show the count of the waiting and completed cases by hospital for a certain region in each year.
     One for the waiting cases, and the other is for the completed cases. 
@@ -116,7 +116,7 @@ def plot_bar_sbs_hospital_tc(autho="All"):
     >>> plot_bar_sbs_hospital_tc(autho="Fraser")
     chart_sbs
     """
-    subdata=region_df(autho)
+    # subdata=region_df(autho)
     top=subdata.groupby(["hospital"])[["waiting"]].sum().reset_index().sort_values(by=['waiting'], ascending=False).head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
@@ -149,21 +149,21 @@ def plot_bar_sbs_hospital_tc(autho="All"):
 # CountTab-plot1: waiting & completed cases by time
 tcp1=html.Iframe(
     id="tcp1",
-    srcDoc=line_plot_tc(),
+    # srcDoc=line_plot_tc(),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # CountTab-plot2: waiting and completed cases by procedure
 tcp2=html.Iframe(
     id="tcp2",
-    srcDoc=plot_bar_sbs_procedure_tc(autho="All"),
+    # srcDoc=plot_bar_sbs_procedure_tc(autho="All"),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 
 # CountTab-plot3: waiting and completed cases by hospital
 tcp3=html.Iframe(
     id="tcp3",
-    srcDoc=plot_bar_sbs_hospital_tc(autho="All"),
+    # srcDoc=plot_bar_sbs_hospital_tc(autho="All"),
     style={'border-width': '0', 'width': '100%', 'height': '400px'}
 )
 

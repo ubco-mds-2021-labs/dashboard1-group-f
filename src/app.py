@@ -161,7 +161,7 @@ def render_page_content(pathname):
     Output('tcp1','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp1(autho):
-    return CountTab.line_plot_tc(autho)
+    return CountTab.line_plot_tc(region_df(autho,alldata=True))
 @app.callback(
     Output('ttp1','srcDoc'),
     Input('region-select', 'value'))
@@ -171,7 +171,7 @@ def update_ttp1(autho):
     Output('tcp2','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp2(autho):
-    return CountTab.plot_bar_sbs_procedure_tc(autho)
+    return CountTab.plot_bar_sbs_procedure_tc(region_df(autho))
 @app.callback(
     Output('ttp2','srcDoc'),
     Input('region-select', 'value'))
@@ -181,7 +181,7 @@ def update_ttp2(autho):
     Output('tcp3','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp3(autho):
-    return CountTab.plot_bar_sbs_hospital_tc(autho)
+    return CountTab.plot_bar_sbs_hospital_tc(region_df(autho))
 @app.callback(
     Output('ttp3','srcDoc'),
     Input('region-select', 'value'))
