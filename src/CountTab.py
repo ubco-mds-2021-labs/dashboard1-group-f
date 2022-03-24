@@ -34,7 +34,7 @@ def plot_bar_sbs_procedure_tc(autho="All"):
     subdata_top=subdata[subdata["procedure"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
             x=alt.X('sum(waiting):Q',title="Total Waiting Cases"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            y=alt.Y("procedure", sort='-x', title = ""),
             color=alt.Color('year')
         ).properties(
             title="Number of Waiting Cases for Different Procedure Groups",
@@ -45,7 +45,7 @@ def plot_bar_sbs_procedure_tc(autho="All"):
     subdata_top2=subdata[subdata["procedure"].isin(top2)]
     chart2 = alt.Chart(subdata_top2).mark_bar().encode(
             x=alt.X('sum(completed):Q',title="Total Completed Cases"),
-            y=alt.Y("procedure", sort='-x',title="Procedure"),
+            y=alt.Y("procedure", sort='-x', title = ""),
             color=alt.Color('year')
         ).properties(
             title="Number of Completed Cases for Different Procedure Groups",
@@ -65,7 +65,7 @@ def plot_bar_sbs_hospital_tc(autho="All"):
     subdata_top=subdata[subdata["hospital"].isin(top)]
     chart1 = alt.Chart(subdata_top).mark_bar().encode(
             x=alt.X('sum(waiting):Q',title="Total Waiting Cases"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
+            y=alt.Y("hospital", sort='-x', title = ""),
             color=alt.Color('year')
         ).properties(
             title="Number of Waiting Cases for Different Hospitals",
@@ -76,7 +76,7 @@ def plot_bar_sbs_hospital_tc(autho="All"):
     subdata_top2=subdata[subdata["hospital"].isin(top2)]
     chart2 = alt.Chart(subdata_top2).mark_bar().encode(
             x=alt.X('sum(completed):Q',title="Total Completed Cases"),
-            y=alt.Y("hospital", sort='-x',title="Hospital"),
+            y=alt.Y("hospital", sort='-x', title = ""),
             color=alt.Color('year')
         ).properties(
             title="Number of Completed Cases for Different Hospitals",
@@ -114,6 +114,8 @@ tcp3=html.Iframe(
 # Waiting and completed case Layout Components
 proc = [
     html.Div([
+        html.H5('Research Question: During the first quarter of 2020, how many procedures were completed in the Interior Health Region?'),
+        html.H6('Answer: 6474  Hint: Tooltip hover over blue line'),
         dbc.Row(dbc.Col(tcp1)),
         dbc.Row(dbc.Col(tcp2)),
             ]),
@@ -121,6 +123,8 @@ proc = [
 
 hosp = [
     html.Div([
+        html.H5('Research Question: In Fraser Health Authority, which 3 hospitals consistantly complete the most number of surgeries?'),
+        html.H6('Answer: Surrey Memorial, Brunaby, and Chilliwack General Hospitals'),
         dbc.Row(dbc.Col(tcp1)),
         dbc.Row(dbc.Col(tcp3)),
             ]),

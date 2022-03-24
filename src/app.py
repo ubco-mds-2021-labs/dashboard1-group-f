@@ -31,13 +31,14 @@ northern = pd.read_csv('data/processed/northern.csv')
 psha = pd.read_csv('data/processed/psha.csv')
 vc = pd.read_csv('data/processed/vancouver_coastal.csv')
 vi = pd.read_csv('data/processed/vancouver_island.csv')
-# add the Y_Q column and fix the year problem
+
+# fix the year problem
 def add_Y_Q(df):
-    df['Y_Q']= df['year'].astype('str').str[2:4].map(str) + '_' + df['quarter'].map(str)
     df['year']= df['year'].astype('str').str[0:4].map(str)
 dflist=[df_all,fraser_all,interior_all,northern_all,psha_all,vc_all,vi_all,df_main,fraser,interior,northern,psha,vc,vi]
 for item in dflist:
     add_Y_Q(item)
+
 # dataframe selection function: 
 def region_df(region="All",alldata=False):
     if alldata==True: #alldata: data for first plot
