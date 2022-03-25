@@ -89,59 +89,56 @@ All team members agree to the Feature Branch workflow, and the following convent
 
 ## Final Reflection on Workload Distribution
 
-** This section should be completed AFTER Milestone 4 is done and submitted! Only one is needed PER group. **
-
-In this section we will ask you to self-report the workload distribution to various categories of tasks.
-For each of the categories, we want you to report the approximate workload distribution, split by the milestone.
-
-Here are the tables you are expected to complete (the first one is pre-filled in so you can see what we're expecting):
-
 ### Milestone 1
 
 | Category           |     Andrew    |     Anqi      |     Kevin     |     Monica    |
 |--------------------|---------------|---------------|---------------|---------------|
-| Repository Setup   |            |            |      80        |              |
-| Sketch             |            |     80       |            |            |
-| Documentation      |     80       |            |            |            |
-| Project Management |            |            |     30        |             |
-| Troubleshooting    |            |            |              |              |
+| Repository Setup   |      10%      |      10%      |      70%      |      10%      |
+| Sketch             |       4%      |      90%      |       3%      |       3%      |
+| Documentation      |      60%      |       3%      |      13%      |      24%      |
+| Project Management |      20%      |      25%      |      35%      |      20%      |
+| Research           |      15%      |      20%      |      20%      |      45%      |
 
-Brief notes/explanations (optional):
-- No troubleshooting was needed for Milestone 1
-- Member 1 and Member did most of the repository setup, whereas 3 and 4 did most of the documentation
+Brief notes/explanations (optional): Troubleshooting was negligable for this milestone, so we have taken the liberty of replacing this category with project "Reserch" instead. This better captures the work we did selecting, uploading and updating the 550 project as well as doing the background research work necessary to understand the domain.
 
 ### Milestone 2
 
 | Category                  |     Andrew    |     Anqi      |     Kevin     |     Monica    |
 |---------------------------|---------------|---------------|---------------|---------------|
-| Documentation/Reflection  |       *        |               |              |      *         |
-| Writing new code          |               |        *       |      *       |               |
-| Code Reviews/editing      |               |               |               |               |
-| Project Management        |               |               |               |               |
-| Testing & Troubleshooting |               |               |       *        |               |
+| Documentation/Reflection  |       70%     |       5%      |       5%      |      20%      |
+| Writing new code          |        3%     |      45%      |      15%      |      37%      |
+| Code Reviews/editing      |       40%     |      30%      |      20%      |      10%      | 
+| Project Management        |        5%     |      20%      |      35%      |      40%      |
+| Testing & Troubleshooting |       10%     |      25%      |      40%      |      25%      |
 
 Brief notes/explanations (optional):
+Since we knew we were going to create 2 tabs, agreement for this milestone was 2 people each code a tab (Anqi & Monica), one person builds layout code (Kevin) and one person (Andrew) writes supporting documentation.  These roles would swap around for the next milestone so everyone had an opportunity to write code and work on documentation.
 
 ### Milestone 3
 
 | Category                  |     Andrew    |     Anqi      |     Kevin     |     Monica    |
 |---------------------------|---------------|---------------|---------------|---------------|
-| Documentation/Reflection  |       *        |               |               |        *       |
-| Writing new code          |       *       |        *      |               |               |
-| Code Reviews/editing      |               |               |               |               |
-| Project Management        |               |               |               |               |
-| Testing & Troubleshooting |       *       |               |       *       |               |
+| Documentation/Reflection  |      20%      |       5%      |       5%      |      70%      |
+| Writing new code          |      35%      |      35%      |      20%      |      10%      |
+| Code Reviews/editing      |      25%      |      20%      |      15%      |      40%      | 
+| Project Management        |      25%      |      20%      |      47%      |       8%      |
+| Testing & Troubleshooting |      30%      |      20%      |      30%      |      20%      |
 
-Brief notes/explanations (optional):
+Brief notes/explanations (optional): Tab code writers (Andrew & Anqi), layout and Heroku code writer (Kevin), supporting documentation and editing (Monica)
 
 ### Milestone 4
 
 | Category                  |     Andrew    |      Anqi     |     Kevin     |     Monica    |
 |---------------------------|---------------|---------------|---------------|---------------|
-| Documentation/Reflection  |       *        |               |      *         |               |
-| Writing new code          |       *       |      *        |               |      -         |
-| Code Reviews/editing      |               |               |      *         |            |
-| Project Management        |               |               |               |               |
-| Testing & Troubleshooting |               |               |               |               |
+| Documentation/Reflection  |      25%      |      10%      |      40%      |      25%      | 
+| Writing new code          |      32%      |      35%      |      15%      |      18%      |
+| Code Reviews/editing      |      10%      |      20%      |      30%      |      40%      |
+| Project Management        |      26%      |      40%      |       5%      |      29%      |
+| Testing & Troubleshooting |      35%      |      22%      |      37%      |       6%      |
+| Totals                    |     500%      |     500%      |     500%      |     500%      |
 
-Brief notes/explanations (optional):
+Brief notes/explanations (optional): Milestone 4-Tab code editors (Andrew & Anqi), Huroku and layout editor (Kevin), summary tab code writer (Monica)
+
+
+Conclusion: You will note that everyone is credited with an equal percentage of work overall. This is by desing.  Although the weightings are relatively reflective of the different work we each did, overall we feel strongly that despite variations from milestone to milestone and from task to task, we all contributed in some way to every task within the project, we were all equally committed to the project and we all put forth an equal level of exemplary effort.
+
