@@ -99,7 +99,7 @@ All team members agree to the Feature Branch workflow, and the following convent
 | Project Management |      20%      |      25%      |      35%      |      20%      |
 | Research           |      15%      |      20%      |      20%      |      45%      |
 
-Brief notes/explanations (optional): Troubleshooting was negligable for this milestone, so we have taken the liberty of replacing this category with project "Reserch" instead. This better captures the work we did selecting, uploading and updating the 550 project as well as doing the background research work necessary to understand the domain.
+Brief notes/explanations (optional): Troubleshooting was negligable for this milestone, so we have taken the liberty of replacing this category with project "Research" instead. This better captures the work we did selecting, uploading and updating the 550 project as well as doing the background research necessary to understand the domain.
 
 ### Milestone 2
 
@@ -112,7 +112,7 @@ Brief notes/explanations (optional): Troubleshooting was negligable for this mil
 | Testing & Troubleshooting |       10%     |      25%      |      40%      |      25%      |
 
 Brief notes/explanations (optional):
-Since we knew we were going to create 2 tabs, agreement for this milestone was 2 people each code a tab (Anqi & Monica), one person builds layout code (Kevin) and one person (Andrew) writes supporting documentation.  These roles would swap around for the next milestone so everyone had an opportunity to write code and work on documentation.
+Since we knew we were going to create 2 tabs, agreement for this milestone was 2 people each code a tab (Anqi & Monica), one person builds layout code (Kevin) and one person (Andrew) writes supporting documentation and does primary edits.  These roles would swap around for the next milestone so everyone had an opportunity to write code and work on documentation.
 
 ### Milestone 3
 
@@ -140,5 +140,5 @@ Brief notes/explanations (optional): Tab code writers (Andrew & Anqi), layout an
 Brief notes/explanations (optional): Milestone 4-Tab code editors (Andrew & Anqi), Huroku and layout editor (Kevin), summary tab code writer (Monica)
 
 
-Conclusion: You will note that everyone is credited with an equal percentage of work overall. This is by desing.  Although the weightings are relatively reflective of the different work we each did, overall we feel strongly that despite variations from milestone to milestone and from task to task, we all contributed in some way to every task within the project, we were all equally committed to the project and we all put forth an equal level of exemplary effort.
+Conclusion: You will note that everyone is credited with an equal percentage of work overall. This is by design.  Although the weightings are relatively reflective of the different work we each did, overall we feel strongly that despite variations from milestone to milestone and from task to task, we all contributed in some way to every task within the project, we were all equally committed to the project and we all put forth an equal level of exemplary effort.
 
