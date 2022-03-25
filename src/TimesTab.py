@@ -1,8 +1,4 @@
 from dash import Dash, dcc, html
-#from pydoc import classname
-#from dash.dependencies import Input, Output, State
-#from pathlib import Path
-
 import dash_bootstrap_components as dbc
 import altair as alt
 import pandas as pd
@@ -10,7 +6,23 @@ import numpy as np
 
 # Wait times line plot
 def line_plot_tt(df):
-    #autho = autho[0]
+    """
+    Create an altair chart object on html that plots a single plot about percentile waiting times from a given dataframe.
+    
+    Parameters
+    ----------
+    df : dataframe
+        The dataframe to plot.
+
+    Returns
+    -------
+    html
+        The returned chart as html. 
+        
+    Examples
+    --------
+    >>> line_plot_tt(df_all)
+    """
     all_by_autho = df
     data=all_by_autho.groupby(['Y_Q'])[["wait_time_50","wait_time_90"]].mean().reset_index().melt('Y_Q')
     chart=alt.Chart(data).mark_line().encode(
@@ -27,7 +39,23 @@ def line_plot_tt(df):
 
 # Wait times side by side bar plot for procedures
 def plot_bar_sbs_procedure_tt(df):
-    #autho = autho[0]
+    """
+    Create an altair chart object on html that plots 2 parallel plots about waiting times for 50% and 90% by procedure from a given dataframe.
+    
+    Parameters
+    ----------
+    df : dataframe
+        The dataframe to plot.
+
+    Returns
+    -------
+    html
+        The returned chart as html.
+        
+    Examples
+    --------
+    >>> plot_bar_sbs_procedure_tt(df_all)
+    """
     subdata = df
     top=subdata.groupby(["procedure"])[["wait_time_50"]].mean().reset_index().sort_values(by=['wait_time_50'], ascending=False).head(20)["procedure"].tolist()
     subdata_top=subdata[subdata["procedure"].isin(top)]
@@ -59,7 +87,23 @@ def plot_bar_sbs_procedure_tt(df):
 
 # Wait times side by side bar plot for hospital
 def plot_bar_sbs_hospital_tt(df):
-    #autho = autho[0]
+    """
+    Create an altair chart object on html that plots 2 parallel plots about waiting times for 50% and 90% by hospital from a given dataframe.
+    
+    Parameters
+    ----------
+    df : dataframe
+        The dataframe to plot.
+
+    Returns
+    -------
+    html
+        The returned chart as html.
+        
+    Examples
+    --------
+    >>> plot_bar_sbs_hospital_tt(df_all)
+    """
     subdata = df
     top=subdata.groupby(["hospital"])[["wait_time_50"]].mean().reset_index().sort_values(by='hospital').head(20)["hospital"].tolist()
     subdata_top=subdata[subdata["hospital"].isin(top)]
