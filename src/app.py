@@ -1,17 +1,14 @@
-from pydoc import classname
 from dash import Dash, dcc, html
-from dash.dependencies import Input, Output, State
-from pathlib import Path
+from dash.dependencies import Input, Output
 
 import dash_bootstrap_components as dbc
-import altair as alt
 import pandas as pd
 import numpy as np
 
-from SideBar import sidebar
-import SummaryTab
-import CountTab
-import TimesTab
+from src.SideBar import sidebar
+import src.SummaryTab as SummaryTab
+import src.CountTab as CountTab
+import src.TimesTab as TimesTab
 
 # Load data
 # Data for first plot 
@@ -106,13 +103,13 @@ app = Dash(
     external_stylesheets = [dbc.themes.MINTY],
     title = 'BC Surgical Wait Times'
 )
-app.config.suppress_callback_exceptions = True
+# app.config.suppress_callback_exceptions = True
 server = app.server
 
 # Configure Altair - uncomment to run locally, comment out for Heroku deployment
-alt.renderers.enable('mimetype')
-alt.data_transformers.enable('data_server')
-alt.data_transformers.disable_max_rows()
+# alt.renderers.enable('mimetype')
+# alt.data_transformers.enable('data_server')
+# alt.data_transformers.disable_max_rows()
 
 # Layout
 app.layout = dbc.Container(
@@ -143,18 +140,13 @@ sidebar.children[4].children[1].value = 'All'
 def render_page_content(pathname):
     if pathname == '/count_tab_proc':
         return CountTab.proc
-        #return 'Count Tab - Process'
     elif pathname == '/count_tab_hosp':
         return CountTab.hosp
-        #return 'Count Tab - Hospital'
     elif pathname == '/times_tab_proc':
         return TimesTab.proc
-        #return 'Times Tab - Process'
     elif pathname == '/times_tab_hosp':
         return TimesTab.hosp
-        #return 'Times Tab - Hospital'
     else:
-        # return SummaryTab.intro
         return SummaryTab.intro
 
 # Tabs
@@ -162,7 +154,7 @@ def render_page_content(pathname):
     Output('tcp1','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp1(autho):
-    return CountTab.line_plot_tc(autho)
+    return CountTab.line_plot_tc(region_df(autho,alldata=True))
 @app.callback(
     Output('ttp1','srcDoc'),
     Input('region-select', 'value'))
@@ -172,7 +164,7 @@ def update_ttp1(autho):
     Output('tcp2','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp2(autho):
-    return CountTab.plot_bar_sbs_procedure_tc(autho)
+    return CountTab.plot_bar_sbs_procedure_tc(region_df(autho))
 @app.callback(
     Output('ttp2','srcDoc'),
     Input('region-select', 'value'))
@@ -182,18 +174,12 @@ def update_ttp2(autho):
     Output('tcp3','srcDoc'),
     Input('region-select', 'value'))
 def update_tcp3(autho):
-    return CountTab.plot_bar_sbs_hospital_tc(autho)
+    return CountTab.plot_bar_sbs_hospital_tc(region_df(autho))
 @app.callback(
     Output('ttp3','srcDoc'),
     Input('region-select', 'value'))
 def update_ttp3(autho):
     return TimesTab.plot_bar_sbs_hospital_tt(region_df(autho))
-
-# @app.callback(
-#     Output('year-slider', 'children'),
-#     Input('year-slider', 'value'))
-# def update_output(input_value):
-#     return 'Year(s) selected{}'.format(value)
 
 if __name__ == '__main__':
     app.run_server()

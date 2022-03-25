@@ -18,7 +18,7 @@ def line_plot_tt(df):
     -------
     html
         The returned chart as html. 
-        
+
     Examples
     --------
     >>> line_plot_tt(df_all)
@@ -41,7 +41,7 @@ def line_plot_tt(df):
 def plot_bar_sbs_procedure_tt(df):
     """
     Create an altair chart object on html that plots 2 parallel plots about waiting times for 50% and 90% by procedure from a given dataframe.
-    
+
     Parameters
     ----------
     df : dataframe
@@ -51,7 +51,7 @@ def plot_bar_sbs_procedure_tt(df):
     -------
     html
         The returned chart as html.
-        
+
     Examples
     --------
     >>> plot_bar_sbs_procedure_tt(df_all)
@@ -89,7 +89,7 @@ def plot_bar_sbs_procedure_tt(df):
 def plot_bar_sbs_hospital_tt(df):
     """
     Create an altair chart object on html that plots 2 parallel plots about waiting times for 50% and 90% by hospital from a given dataframe.
-    
+
     Parameters
     ----------
     df : dataframe
@@ -99,7 +99,7 @@ def plot_bar_sbs_hospital_tt(df):
     -------
     html
         The returned chart as html.
-        
+
     Examples
     --------
     >>> plot_bar_sbs_hospital_tt(df_all)
