@@ -21,7 +21,7 @@ def line_plot_tt(df):
         
     Examples
     --------
-    >>> line_plot_tc(df_all)
+    >>> line_plot_tt(df_all)
     """
     all_by_autho = df
     data=all_by_autho.groupby(['Y_Q'])[["wait_time_50","wait_time_90"]].mean().reset_index().melt('Y_Q')
