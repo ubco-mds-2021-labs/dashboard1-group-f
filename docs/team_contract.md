@@ -85,3 +85,63 @@ All team members agree to the Feature Branch workflow, and the following convent
 3. Any time a member would like to add, commit, and push their code, they should do that for the local and remote of the feature branch first.
 4. After the remote feature branch has been pushed successfully, the member should send a pull request for merging their updated feature to the main branch assuming it was approved by other group members.
 5. When conflicts happen during merging, the team member should attempt to check their work to solve within a reasonable time frame. If it could not be resolved, they should seek help from other members in order to avoid delays.
+
+
+## Final Reflection on Workload Distribution
+
+** This section should be completed AFTER Milestone 4 is done and submitted! Only one is needed PER group. **
+
+In this section we will ask you to self-report the workload distribution to various categories of tasks.
+For each of the categories, we want you to report the approximate workload distribution, split by the milestone.
+
+Here are the tables you are expected to complete (the first one is pre-filled in so you can see what we're expecting):
+
+### Milestone 1
+
+| Category           |     Andrew    |     Anqi      |     Kevin     |     Monica    |
+|--------------------|---------------|---------------|---------------|---------------|
+| Repository Setup   |            |            |      80        |              |
+| Sketch             |            |     80       |            |            |
+| Documentation      |     80       |            |            |            |
+| Project Management |            |            |     30        |             |
+| Troubleshooting    |            |            |              |              |
+
+Brief notes/explanations (optional):
+- No troubleshooting was needed for Milestone 1
+- Member 1 and Member did most of the repository setup, whereas 3 and 4 did most of the documentation
+
+### Milestone 2
+
+| Category                  |     Andrew    |     Anqi      |     Kevin     |     Monica    |
+|---------------------------|---------------|---------------|---------------|---------------|
+| Documentation/Reflection  |       *        |               |              |      *         |
+| Writing new code          |               |        *       |      *       |               |
+| Code Reviews/editing      |               |               |               |               |
+| Project Management        |               |               |               |               |
+| Testing & Troubleshooting |               |               |       *        |               |
+
+Brief notes/explanations (optional):
+
+### Milestone 3
+
+| Category                  |     Andrew    |     Anqi      |     Kevin     |     Monica    |
+|---------------------------|---------------|---------------|---------------|---------------|
+| Documentation/Reflection  |       *        |               |               |        *       |
+| Writing new code          |       *       |        *      |               |               |
+| Code Reviews/editing      |               |               |               |               |
+| Project Management        |               |               |               |               |
+| Testing & Troubleshooting |       *       |               |       *       |               |
+
+Brief notes/explanations (optional):
+
+### Milestone 4
+
+| Category                  |     Andrew    |      Anqi     |     Kevin     |     Monica    |
+|---------------------------|---------------|---------------|---------------|---------------|
+| Documentation/Reflection  |       *        |               |      *         |               |
+| Writing new code          |       *       |      *        |               |      -         |
+| Code Reviews/editing      |               |               |      *         |            |
+| Project Management        |               |               |               |               |
+| Testing & Troubleshooting |               |               |               |               |
+
+Brief notes/explanations (optional):
